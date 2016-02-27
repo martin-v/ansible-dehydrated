@@ -96,6 +96,7 @@ Open tasks
 
 [![Build Status](https://travis-ci.org/martin-v/ansible-letsencryptsh.svg?branch=master)](https://travis-ci.org/martin-v/ansible-letsencryptsh)
 
+0. Umask for letsencryptsh user to paranoid mode
 0. Call initial certificate requests
 0. Write <del>more</del> tests
 0. Example documentation for nginx and apache configuration
