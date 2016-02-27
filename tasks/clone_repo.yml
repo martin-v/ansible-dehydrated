@@ -6,3 +6,4 @@
     repo: "{{ lcsh_repourl }}"
     dest: "{{ lcsh_userhome }}/letsencrypt.sh"
     version: "{{ lcsh_commit }}"
+  become_user: "{{ lcsh_username }}"
