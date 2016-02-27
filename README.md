@@ -96,12 +96,13 @@ Open tasks
 
 [![Build Status](https://travis-ci.org/martin-v/ansible-letsencryptsh.svg?branch=master)](https://travis-ci.org/martin-v/ansible-letsencryptsh)
 
-* Call initial certificate requests
-* Restart webserver after certificate renewal
-* Replace cron with systemd timer
-* Support hooks
-* Example documentation for nginx and apache configuration
-* Example documentation for import from official letsencrypt client
+0. Restart webserver after certificate renewal
+0. Call initial certificate requests
+0. Write <del>more</del> tests
+0. Example documentation for nginx and apache configuration
+0. Example documentation for import from official letsencrypt client
+0. Replace cron with systemd timer
+0. Support hooks
 
 
 License
