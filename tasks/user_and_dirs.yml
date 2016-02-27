@@ -1,0 +1,26 @@
+---
+
+
+- name: Create user for {{ lcsh_username }}.
+  user:
+    name: "{{ lcsh_username }}"
+    home: "{{ lcsh_userhome }}"
+    group: "{{ lcsh_webgoup }}"
+
+
+- name: Create configuration directory {{ lcsh_configdir }}.
+  file:
+    path: "{{ lcsh_configdir }}"
+    state: directory
+    owner: "{{ lcsh_username }}"
+    group: "{{ lcsh_webgoup }}"
+    mode: 0750
+
+
+- name: Create acme-challenges directory {{ lcsh_challengesdir }}.
+  file:
+    path: "{{ lcsh_challengesdir }}"
+    state: directory
+    owner: "{{ lcsh_username }}"
+    group: "{{ lcsh_webgoup }}"
+    mode: 0750

@@ -1,0 +1,14 @@
+---
+
+
+- name: Install required packages
+  apt:
+    package: "{{ item }}"
+    state: present
+  with_items:
+  - openssl
+  - curl
+  - sed
+  - grep
+  - mktemp
+  - git

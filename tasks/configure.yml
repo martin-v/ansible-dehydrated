@@ -1,0 +1,41 @@
+---
+
+
+- name: Create domain configuration file.
+  copy:
+    content: "{{ domanins | mandatory }}"
+    dest: "{{ lcsh_configdir }}/domains.txt"
+  become_user: "{{ lcsh_username }}"
+
+
+- name: Copy config.sh example to configuration directory.
+  copy:
+    src: "{{ lcsh_userhome }}/letsencrypt.sh/config.sh.example"
+    dest: "{{ lcsh_configdir }}/config.sh"
+    remote_src: true
+    force: false
+  become_user: "{{ lcsh_username }}"
+
+- name: Set BASEDIR value to lcsh_configdir value.
+  lineinfile:
+    dest: "{{ lcsh_configdir }}/config.sh"
+    regexp: "^#?BASEDIR"
+    line: "BASEDIR=\"{{ lcsh_configdir }}\""
+
+- name: Set WELLKNOWN value to lcsh_challengesdir value.
+  lineinfile:
+    dest: "{{ lcsh_configdir }}/config.sh"
+    regexp: "^#?WELLKNOWN"
+    line: "WELLKNOWN=\"{{ lcsh_challengesdir }}\""
+
+- name: Set CONTACT_EMAIL value to lcsh_contactemail value.
+  lineinfile:
+    dest: "{{ lcsh_configdir }}/config.sh"
+    regexp: "^#?CONTACT_EMAIL"
+    line: "CONTACT_EMAIL=\"{{ lcsh_contactemail | mandatory }}\""
+
+- name: Set path to certificate authority.
+  lineinfile:
+    dest: "{{ lcsh_configdir }}/config.sh"
+    regexp: "^#?CA"
+    line: "CA=\"{{ lcsh_acme_api }}\""
