@@ -1,2 +1,40 @@
 ---
-# defaults file for letsencryptsh
+
+# See README.md for details. Commented out to enforce mandatory variable!
+#lcsh_contactemail:
+
+# See README.md for details. Commented out to enforce mandatory variable!
+#domanins:
+
+
+# See README.md for details.
+lcsh_challengesdir: /var/www/letsencrypt.sh/
+
+
+
+# advanced variables, normaly you don't need change any of them.
+
+
+# username for the privilege dropping.
+lcsh_username: letsencrypt.sh
+# home for {{ lcsh_username }} and directory for letsencrypt binaries
+lcsh_userhome: /home/letsencrypt.sh
+
+# your webservers public html group
+lcsh_webgoup: www-data
+
+
+# directory for configuration files.
+lcsh_configdir: /etc/letsencrypt.sh
+
+
+# The acme api to call, for tests use staging api
+lcsh_acme_api: https://acme-v01.api.letsencrypt.org/directory
+#lcsh_acme_api: https://acme-staging.api.letsencrypt.org/directory
+
+
+# url and revison for checkout letsencrypt.sh
+lcsh_repourl: https://github.com/lukas2511/letsencrypt.sh.git
+# use here only versions you have reviewed by your self, letsencrypt.sh is
+# working with your secret key, so be carefull!
+lcsh_commit: 2099c77fee3e7a15c5cea93063248af4569bf8de

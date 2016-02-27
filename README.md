@@ -1,38 +1,113 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Install and configure
+[`letsencrypt.sh`](https://github.com/lukas2511/letsencrypt.sh).
+Create user for privilege dropping and cron configuration for certificate
+renewals.
+
+
+**letsencrypt.sh is working with your private keys so be careful and review
+the code of this [ansible role](https://github.com/martin-v/ansible-letsencryptsh)
+an the used [letsencrypt.sh script](https://github.com/lukas2511/letsencrypt.sh/blob/2099c77fee3e7a15c5cea93063248af4569bf8de/letsencrypt.sh).**
+
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Installs on host:
+  - openssl
+  - curl
+  - sed
+  - grep
+  - mktemp
+  - git
+
+This role need a webserver who serves the directory configured in `lcsh_challengesdir`
+(default: `/var/www/letsencrypt.sh/`) at location
+`http://<your-domain>/.well-known/acme-challenge/` for all certificate
+request domains.
+
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+### Required Variables:
+
+Address for the letsencrypt account. Mostly for certificate expiration notices,
+but should be not happen if the cron job works fine.
+
+    lcsh_contactemail: certmaster@example.com
+
+List of domains for certificate requests. For each line a certificate will
+be created, in folder `/etc/letsencrypt.sh/certs/` with the name of the first
+domain in line. The first domain is the common name, the other in line will
+be alternate names for the certificate.
+
+    domanins: |
+      example.com
+      example.org www.example.org blog.example.org
+
+
+### Optional Variables:
+
+Directory for acme-challenge files. Your webserver should make this directory
+public on location `http://<your-domain>/.well-known/acme-challenge/` for all domains listed
+before. This directory will be created if it not exist. It should be only
+writable for letsencrypt.sh user and readable by your webserver, this will
+be enforced by this role.
+
+    lcsh_challengesdir: /var/www/letsencrypt.sh/
+
+
+There are also some more advanced variables for super user who need more control,
+for details look at `defaults/main.yml`
+
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None.
+
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+        - { role: martin-v.letsencryptsh }
+      vars_files:
+        - group_vars/letsencryptsh.yml
+
+Example Variables file
+----------------------
+
+    ---
+
+    lcsh_contactemail: certmaster@example.com
+
+    domanins: |
+      example.com
+      example.org www.example.org blog.example.org
+
+
+Open tasks
+----------
+
+* Call initial certificate requests
+* Restart webserver after certificate renewal
+* Replace cron with systemd timer
+* Support hooks
+* Example documentation for nginx and apache configuration
+* Example documentation for import from official letsencrypt client
+
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+This role was created in 2016 by [Martin V](https://github.com/martin-v).

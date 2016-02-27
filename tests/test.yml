@@ -1,5 +1,7 @@
 ---
-- hosts: localhost
+- hosts: all
   remote_user: root
   roles:
     - letsencryptsh
+  vars_files:
+    - test_vars.yml

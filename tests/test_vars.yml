@@ -1,0 +1,10 @@
+---
+
+lcsh_contactemail: certmaster@example.com
+
+domanins: |
+  example.com
+  example.org www.example.org blog.example.org
+
+# use letsencrypt test api
+lcsh_acme_api: https://acme-staging.api.letsencrypt.org/directory
