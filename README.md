@@ -96,7 +96,6 @@ Open tasks
 
 [![Build Status](https://travis-ci.org/martin-v/ansible-letsencryptsh.svg?branch=master)](https://travis-ci.org/martin-v/ansible-letsencryptsh)
 
-0. Restart webserver after certificate renewal
 0. Call initial certificate requests
 0. Write <del>more</del> tests
 0. Example documentation for nginx and apache configuration

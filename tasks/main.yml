@@ -83,8 +83,7 @@
 
 
 - name: Add cron script for regularly renewals.
-  cron:
-    name: letsencrypt sh renewals
-    user: "{{ lcsh_username }}"
-    job: "{{ lcsh_userhome }}/letsencrypt.sh/letsencrypt.sh -c > {{ lcsh_userhome }}/weekly-cron.log"
-    special_time: weekly
+  template:
+    src: cron_letsencrypt.sh.j2
+    dest: /etc/cron.weekly/letsencrypt.sh
+    mode: 0700

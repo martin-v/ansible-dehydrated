@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#
+# letsencrypt.sh cron weekly
+
+set -e
+
+LOG="{{ lcsh_userhome }}/weekly-cron.log"
+EXEC="{{ lcsh_userhome }}/letsencrypt.sh/letsencrypt.sh"
+
+su "{{ lcsh_username }}" --command "$EXEC --cron" >> "$LOG" 2> >(tee -a "$LOG" >&2)
+
+pgrep nginx > /dev/null && systemctl restart nginx.service >> "$LOG"
+pgrep apache2 > /dev/null && systemctl restart apache2.service >> "$LOG"
+
+su "{{ lcsh_username }}" --command "$EXEC --cleanup" >> "$LOG" 2> >(tee -a "$LOG" >&2)
+
+exit 0
