@@ -10,6 +10,7 @@ addons:
   apt:
     packages:
     - python-pip
+    - nginx-light
 
 install:
   # Install ansible
@@ -20,6 +21,9 @@ install:
 
   # Create ansible.cfg with correct roles_path
   - printf '[defaults]\nroles_path=../' >ansible.cfg
+
+  # create symlink for ansible role discovery, if needed
+  - ln -s $(basename $(pwd)) ../letsencryptsh || true
 
 script:
   # Basic role syntax check
