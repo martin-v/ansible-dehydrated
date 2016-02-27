@@ -94,6 +94,8 @@ Example Variables file
 Open tasks
 ----------
 
+[![Build Status](https://travis-ci.org/martin-v/ansible-letsencryptsh.svg?branch=master)](https://travis-ci.org/martin-v/ansible-letsencryptsh)
+
 * Call initial certificate requests
 * Restart webserver after certificate renewal
 * Replace cron with systemd timer
