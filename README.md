@@ -12,6 +12,9 @@ the code of this [ansible role](https://github.com/martin-v/ansible-letsencrypts
 an the used [letsencrypt.sh script](https://github.com/lukas2511/letsencrypt.sh/blob/2099c77fee3e7a15c5cea93063248af4569bf8de/letsencrypt.sh).**
 
 
+For import from official letsencrypt client look at [letsencrypt.sh import wiki page](https://github.com/lukas2511/letsencrypt.sh/wiki/Import-from-official-letsencrypt-client).
+
+
 Requirements
 ------------
 
@@ -100,7 +103,6 @@ Open tasks
 0. Call initial certificate requests
 0. Write <del>more</del> tests
 0. Example documentation for nginx and apache configuration
-0. Example documentation for import from official letsencrypt client
 0. Replace cron with systemd timer
 0. Support hooks
 
