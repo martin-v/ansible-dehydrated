@@ -1,14 +1,14 @@
 ---
 
 
-- name: Create user for {{ lcsh_username }}.
+- name: Create user for {{ lcsh_username }}
   user:
     name: "{{ lcsh_username }}"
     home: "{{ lcsh_userhome }}"
     group: "{{ lcsh_webgoup }}"
 
 
-- name: Create configuration directory {{ lcsh_configdir }}.
+- name: Create configuration directory {{ lcsh_configdir }}
   file:
     path: "{{ lcsh_configdir }}"
     state: directory
@@ -17,7 +17,7 @@
     mode: 0750
 
 
-- name: Create acme-challenges directory {{ lcsh_challengesdir }}.
+- name: Create acme-challenges directory {{ lcsh_challengesdir }}
   file:
     path: "{{ lcsh_challengesdir }}"
     state: directory

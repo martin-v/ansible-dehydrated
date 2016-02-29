@@ -1,7 +1,7 @@
 ---
 
 
-- name: Clone repository to userhome.
+- name: Clone repository to userhome
   git:
     repo: "{{ lcsh_repourl }}"
     dest: "{{ lcsh_userhome }}/letsencrypt.sh"

@@ -1,7 +1,7 @@
 ---
 
 
-- name: Create domain configuration file.
+- name: Create domain configuration file
   copy:
     content: "{{ domanins | mandatory }}"
     dest: "{{ lcsh_configdir }}/domains.txt"
@@ -9,7 +9,7 @@
     group: "{{ lcsh_webgoup }}"
 
 
-- name: Copy config.sh example to configuration directory.
+- name: Copy config.sh example to configuration directory
   copy:
     src: "{{ lcsh_userhome }}/letsencrypt.sh/config.sh.example"
     dest: "{{ lcsh_configdir }}/config.sh"
@@ -18,25 +18,25 @@
     owner: "{{ lcsh_username }}"
     group: "{{ lcsh_webgoup }}"
 
-- name: Set BASEDIR value to lcsh_configdir value.
+- name: Set BASEDIR value to lcsh_configdir value
   lineinfile:
     dest: "{{ lcsh_configdir }}/config.sh"
     regexp: "^#?BASEDIR"
     line: "BASEDIR=\"{{ lcsh_configdir }}\""
 
-- name: Set WELLKNOWN value to lcsh_challengesdir value.
+- name: Set WELLKNOWN value to lcsh_challengesdir value
   lineinfile:
     dest: "{{ lcsh_configdir }}/config.sh"
     regexp: "^#?WELLKNOWN"
     line: "WELLKNOWN=\"{{ lcsh_challengesdir }}\""
 
-- name: Set CONTACT_EMAIL value to lcsh_contactemail value.
+- name: Set CONTACT_EMAIL value to lcsh_contactemail value
   lineinfile:
     dest: "{{ lcsh_configdir }}/config.sh"
     regexp: "^#?CONTACT_EMAIL"
     line: "CONTACT_EMAIL=\"{{ lcsh_contactemail | mandatory }}\""
 
-- name: Set path to certificate authority.
+- name: Set path to certificate authority
   lineinfile:
     dest: "{{ lcsh_configdir }}/config.sh"
     regexp: "^#?CA"
