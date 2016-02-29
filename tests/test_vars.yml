@@ -8,3 +8,6 @@ domanins: |
 
 # use letsencrypt test api
 lcsh_acme_api: https://acme-staging.api.letsencrypt.org/directory
+# use test version with workaround for unreachable private test vms
+lcsh_repourl: https://github.com/martin-v/letsencrypt.sh.git
+lcsh_commit: selfsigned_for_test_in_vms

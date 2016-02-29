@@ -13,4 +13,6 @@ Vagrant.configure(2) do |config|
 		ansible.verbose = "v"
 		ansible.sudo = true
 	end
+	config.vm.provision "shell",
+		inline: "/etc/cron.weekly/letsencrypt.sh"
 end
