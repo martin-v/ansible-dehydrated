@@ -6,6 +6,15 @@ domanins: |
   example.com
   example.org www.example.org blog.example.org
 
+
+lcsh_deploy_cert: |
+  mkdir -p /etc/nginx/ssl/${DOMAIN}
+  cp "${KEYFILE}" "${CERTFILE}" "${FULLCHAINFILE}" "${CHAINFILE}" /etc/nginx/ssl/${DOMAIN}
+  chown root:www-data /etc/nginx/ssl/${DOMAIN}/*
+  chmod 600 /etc/nginx/ssl/${DOMAIN}/*
+  systemctl restart nginx.service
+
+
 # use letsencrypt test api
 lcsh_acme_api: https://acme-staging.api.letsencrypt.org/directory
 # use test version with workaround for unreachable private test vms

@@ -7,6 +7,10 @@
 #domanins:
 
 
+# See README.md for details. Commented out to enforce mandatory variable!
+#lcsh_deploy_cert:
+
+
 # See README.md for details.
 lcsh_challengesdir: /var/www/letsencrypt.sh/
 

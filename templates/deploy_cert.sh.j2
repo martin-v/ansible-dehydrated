@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#
+# deploy_cert be called for each domain from cron script.
+# See /etc/cron.weekly/letsencrypt.sh
+
+
+function deploy_cert {
+	local DOMAIN="${1}" KEYFILE="${2}" CERTFILE="${3}" FULLCHAINFILE="${4}" CHAINFILE="${5}"
+	set -o xtrace # use tracing for user defined code
+
+# ========== start code from ansible varibale ============
+{{ lcsh_deploy_cert | mandatory }}
+# ========== end code from ansible varibale ==============
+
+	set +o xtrace
+}

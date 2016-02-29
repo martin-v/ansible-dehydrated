@@ -1,17 +1,55 @@
 #!/usr/bin/env bash
 #
 # letsencrypt.sh cron weekly
+set -o nounset -o errexit -o pipefail
 
-set -e
-
+LCSH_USER="{{ lcsh_username }}"
+LCSH_BIN="{{ lcsh_userhome }}/letsencrypt.sh/letsencrypt.sh"
+TO_DEPLOY_DIR="{{ lcsh_configdir }}/to_deploy"
 LOG="{{ lcsh_userhome }}/weekly-cron.log"
-EXEC="{{ lcsh_userhome }}/letsencrypt.sh/letsencrypt.sh"
 
-su "{{ lcsh_username }}" --command "$EXEC --cron" >> "$LOG" 2> >(tee -a "$LOG" >&2)
 
-pgrep nginx > /dev/null && systemctl restart nginx.service >> "$LOG"
-pgrep apache2 > /dev/null && systemctl restart apache2.service >> "$LOG"
+function log() {
+	echo "============= ${1} ==============" >> "$LOG"
+}
+log "cron run $(date -Is) start"
 
-su "{{ lcsh_username }}" --command "$EXEC --cleanup" >> "$LOG" 2> >(tee -a "$LOG" >&2)
 
+# start letsencrypt.sh with option --cron
+su "$LCSH_USER" --command "$LCSH_BIN --cron" >> "$LOG" 2> >(tee -a "$LOG" >&2)
+
+
+log "letsencrypt.sh finished, start deploy certificates"
+
+
+function deploy_cert {
+	# fallback function for syntax errrors in ansible lcsh_deploy_cert variable.
+	echo "Certificate deployment failed for domain $1!
+		Deploy script has syntax errrors, check your lcsh_deploy_cert variable!"
+}
+# try to source ansible configured function deploy_cert
+source "/usr/local/sbin/deploy_cert.sh"
+
+shopt -s nullglob
+for task in $TO_DEPLOY_DIR/*
+do
+	deploy_cert $(cat "$task") &>> "$LOG"
+	if [[ $? == 0 ]];
+	then
+		rm "$task"
+	else
+		echo "Certificate deployment for domain $(basename $task) failed!
+			Please check $LOG for details!"
+	fi
+done
+
+
+log "certificates deployed, start cleanup"
+
+
+# start letsencrypt.sh with option --cleanup
+su "$LCSH_USER" --command "$LCSH_BIN --cleanup" >> "$LOG" 2> >(tee -a "$LOG" >&2)
+
+
+log "cron run $(date -Is) end"
 exit 0

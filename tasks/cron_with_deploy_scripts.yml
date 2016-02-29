@@ -1,0 +1,39 @@
+---
+
+
+- name: Create to_deploy directory for hook.sh
+  file:
+    path: "{{ lcsh_configdir }}/to_deploy"
+    state: directory
+    owner: "{{ lcsh_username }}"
+    group: "{{ lcsh_webgoup }}"
+    mode: 0750
+
+
+- name: Add hook.sh to create files for deploy_certs script
+  template:
+    src: hook.sh.j2
+    dest: "{{ lcsh_configdir }}/hook.sh"
+    mode: 0700
+    owner: "{{ lcsh_username }}"
+    group: "{{ lcsh_webgoup }}"
+
+- name: Set HOOK value for deploy scripts in configuration
+  lineinfile:
+    dest: "{{ lcsh_configdir }}/config.sh"
+    regexp: "^#?HOOK"
+    line: "HOOK=\"{{ lcsh_configdir }}/hook.sh\""
+
+
+- name: Add deploy_certs script. Will be called from cron script with root permissions for each domain
+  template:
+    src: deploy_cert.sh.j2
+    dest: "/usr/local/sbin/deploy_cert.sh"
+    mode: 0700
+
+
+- name: Add cron script for regularly renewals
+  template:
+    src: cron_letsencrypt.sh.j2
+    dest: /etc/cron.weekly/letsencrypt.sh
+    mode: 0700
