@@ -6,13 +6,9 @@ ENV['ANSIBLE_ROLES_PATH'] = ".."
 Vagrant.configure(2) do |config|
 	config.vm.box = "martin-v/debian-jessie-libvirt"
 	config.vm.hostname = "letsencrypttest"
-	config.vm.provision "shell",
-		inline: "apt-get -y install nginx-light"
 	config.vm.provision :ansible do |ansible|
 		ansible.playbook = "tests/test.yml"
 		ansible.verbose = "v"
 		ansible.sudo = true
 	end
-	config.vm.provision "shell",
-		inline: "/etc/cron.weekly/letsencrypt.sh"
 end

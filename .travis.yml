@@ -10,7 +10,6 @@ addons:
   apt:
     packages:
     - python-pip
-    - nginx-light
 
 install:
   # Install ansible

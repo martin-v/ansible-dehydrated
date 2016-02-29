@@ -1,7 +1,25 @@
 ---
+
+
 - hosts: all
   remote_user: root
-  roles:
-    - letsencryptsh
+  tasks:
+  - name: Install nginx-light as test server
+    apt:
+      package: "nginx-light"
+      state: present
+
+
+- hosts: all
+  remote_user: root
   vars_files:
     - test_vars.yml
+  roles:
+    - letsencryptsh
+
+
+- hosts: all
+  remote_user: root
+  tasks:
+  - name: run weekly cron script to initial create all certificates
+    shell: "/etc/cron.weekly/letsencrypt.sh"
