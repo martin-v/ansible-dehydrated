@@ -1,32 +1,40 @@
 ---
+sudo: required
 language: python
 python: "2.7"
 
-# Use the new container infrastructure
-sudo: false
 
-# Install ansible
-addons:
-  apt:
-    packages:
-    - python-pip
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install python-pip mktemp -qq
 
 install:
-  # Install ansible
-  - pip install ansible
+  # Install Ansible, set to version 2.0.0 because 2.0.1 has a bug.
+  - pip install ansible==2.0.0
 
-  # Check ansible version
-  - ansible --version
-
-  # Create ansible.cfg with correct roles_path
+  # Create ansible.cfg with "correct" roles_path
   - printf '[defaults]\nroles_path=../' >ansible.cfg
 
-  # create symlink for ansible role discovery, if needed
-  - ln -s $(basename $(pwd)) ../letsencryptsh || true
+  # Create symlink for Ansible role discovery
+  - ln -s $(basename $(pwd)) ../letsencryptsh
+
 
 script:
   # Basic role syntax check
-  - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
+  - ansible-playbook -i tests/inventory tests/test.yml --syntax-check
+
+  # Run the role/playbook with ansible-playbook.
+  - ansible-playbook -i tests/inventory tests/test.yml -vvv --connection=local --become
+
+  # Run the role/playbook again, checking to make sure it's idempotent.
+  - >
+    ansible-playbook -i tests/inventory tests/test.yml -vvv --connection=local --become
+    | grep -q 'changed=0.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
+
+  # Get logfile from script run
+  - cat /home/letsencrypt.sh/weekly-cron.log
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

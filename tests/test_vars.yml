@@ -12,7 +12,7 @@ lcsh_deploy_cert: |
   cp "${KEYFILE}" "${CERTFILE}" "${FULLCHAINFILE}" "${CHAINFILE}" /etc/nginx/ssl/${DOMAIN}
   chown root:www-data /etc/nginx/ssl/${DOMAIN}/*
   chmod 600 /etc/nginx/ssl/${DOMAIN}/*
-  systemctl restart nginx.service
+  hash systemctl 2>/dev/null && systemctl restart nginx.service
 
 
 # use letsencrypt test api

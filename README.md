@@ -165,7 +165,8 @@ For import from official letsencrypt client take a look at
 Open tasks
 ----------
 
-[![Build Status](https://travis-ci.org/martin-v/ansible-letsencryptsh.svg?branch=master)](https://travis-ci.org/martin-v/ansible-letsencryptsh)
+[![Build Status travis](https://travis-ci.org/martin-v/ansible-letsencryptsh.svg?branch=master)](https://travis-ci.org/martin-v/ansible-letsencryptsh)
+[![Build Status semaphore](https://semaphoreci.com/api/v1/martin-v/ansible-letsencryptsh/branches/master/badge.svg)](https://semaphoreci.com/martin-v/ansible-letsencryptsh)
 
 0. Write <del>more</del> tests
 0. Example documentation for nginx and apache configuration
