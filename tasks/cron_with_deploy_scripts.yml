@@ -6,7 +6,7 @@
     path: "{{ lcsh_configdir }}/to_deploy"
     state: directory
     owner: "{{ lcsh_username }}"
-    group: "{{ lcsh_webgoup }}"
+    group: "{{ lcsh_usergroup }}"
     mode: 0750
 
 
@@ -16,7 +16,7 @@
     dest: "{{ lcsh_configdir }}/hook.sh"
     mode: 0700
     owner: "{{ lcsh_username }}"
-    group: "{{ lcsh_webgoup }}"
+    group: "{{ lcsh_usergroup }}"
 
 - name: Set HOOK value for deploy scripts in configuration
   lineinfile:

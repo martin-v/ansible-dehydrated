@@ -99,7 +99,6 @@ Open tasks
 
 [![Build Status](https://travis-ci.org/martin-v/ansible-letsencryptsh.svg?branch=master)](https://travis-ci.org/martin-v/ansible-letsencryptsh)
 
-0. Switch to private group
 0. comments for lcsh_deploy_cert
 0. Umask for letsencryptsh user to paranoid mode
 0. Call initial certificate requests

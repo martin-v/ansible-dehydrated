@@ -19,13 +19,12 @@ lcsh_challengesdir: /var/www/letsencrypt.sh/
 # advanced variables, normaly you don't need change any of them.
 
 
-# username for the privilege dropping.
+# username for privilege dropping.
 lcsh_username: letsencrypt.sh
+# usergroup for privilege dropping.
+lcsh_usergroup: letsencrypt.sh
 # home for {{ lcsh_username }} and directory for letsencrypt binaries
 lcsh_userhome: /home/letsencrypt.sh
-
-# your webservers public html group
-lcsh_webgoup: www-data
 
 
 # directory for configuration files.

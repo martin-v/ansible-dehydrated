@@ -1,11 +1,16 @@
 ---
 
 
+- name: Create group for user {{ lcsh_username }}
+  group:
+    name: "{{ lcsh_usergroup }}"
+
+
 - name: Create user for {{ lcsh_username }}
   user:
     name: "{{ lcsh_username }}"
     home: "{{ lcsh_userhome }}"
-    group: "{{ lcsh_webgoup }}"
+    group: "{{ lcsh_usergroup }}"
 
 
 - name: Create configuration directory {{ lcsh_configdir }}
@@ -13,7 +18,7 @@
     path: "{{ lcsh_configdir }}"
     state: directory
     owner: "{{ lcsh_username }}"
-    group: "{{ lcsh_webgoup }}"
+    group: "{{ lcsh_usergroup }}"
     mode: 0750
 
 
@@ -22,5 +27,5 @@
     path: "{{ lcsh_challengesdir }}"
     state: directory
     owner: "{{ lcsh_username }}"
-    group: "{{ lcsh_webgoup }}"
+    group: "{{ lcsh_usergroup }}"
     mode: 0750

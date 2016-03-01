@@ -6,7 +6,7 @@
     content: "{{ domanins | mandatory }}"
     dest: "{{ lcsh_configdir }}/domains.txt"
     owner: "{{ lcsh_username }}"
-    group: "{{ lcsh_webgoup }}"
+    group: "{{ lcsh_usergroup }}"
 
 
 - name: Copy config.sh example to configuration directory
@@ -16,7 +16,7 @@
     remote_src: true
     force: false
     owner: "{{ lcsh_username }}"
-    group: "{{ lcsh_webgoup }}"
+    group: "{{ lcsh_usergroup }}"
 
 - name: Set BASEDIR value to lcsh_configdir value
   lineinfile:
