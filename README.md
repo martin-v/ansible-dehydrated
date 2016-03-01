@@ -1,10 +1,8 @@
 letsencrypt.sh
 ==============
 
-Install and configure
-[`letsencrypt.sh`](https://github.com/lukas2511/letsencrypt.sh).
-Create user for privilege dropping and cron configuration for certificate
-renewals.
+Install and configure `letsencrypt.sh`. Create user for privilege dropping
+and cron configuration for certificate renewals.
 
 
 **letsencrypt.sh is working with your private keys so be careful and review
@@ -12,25 +10,17 @@ the code of this [ansible role](https://github.com/martin-v/ansible-letsencrypts
 an the used [letsencrypt.sh script](https://github.com/lukas2511/letsencrypt.sh/blob/2099c77fee3e7a15c5cea93063248af4569bf8de/letsencrypt.sh).**
 
 
-To create certificates on ansible deployment, you can call the regular cron
-script: `shell: "/etc/cron.weekly/letsencrypt.sh"`. The folder `tests` contain
-a full running example.
-
-
-For import from official letsencrypt client take a look at
-[letsencrypt.sh import wiki page](https://github.com/lukas2511/letsencrypt.sh/wiki/Import-from-official-letsencrypt-client).
-
-
 Requirements
 ------------
 
 The role installs on host:
-  - openssl
-  - curl
-  - sed
-  - grep
-  - mktemp
-  - git
+
+  * openssl
+  * curl
+  * sed
+  * grep
+  * mktemp
+  * git
 
 This role need a webserver who serves the directory configured in `lcsh_challengesdir`
 (default: `/var/www/letsencrypt.sh/`) at location
@@ -81,17 +71,19 @@ complete letsencrypt.sh run and with root permissions. The code is called
 once for each certificate that has been produced.
 
 Parameters:
-- `DOMAIN`
+
+* `DOMAIN`
   The primary domain name, i.e. the certificate common name (CN).
-- `KEYFILE`
+* `KEYFILE`
   The path of the file containing the private key.
-- `CERTFILE`
+* `CERTFILE`
   The path of the file containing the signed certificate.
-- `FULLCHAINFILE`
+* `FULLCHAINFILE`
   The path of the file containing the full certificate chain.
-- `CHAINFILE`
+* `CHAINFILE`
   The path of the file containing the intermediate certificate(s).
 
+Example:
 
     lcsh_deploy_cert: |
       mkdir -p /etc/nginx/ssl/${DOMAIN}
@@ -129,13 +121,16 @@ None.
 Example Playbook
 ----------------
 
-    - hosts: servers
-      roles:
-        - { role: martin-v.letsencryptsh }
+    - hosts: all
+      remote_user: root
       vars_files:
-        - group_vars/letsencryptsh.yml
+        - letsencryptsh_vars.yml
+      roles:
+        - martin-v.letsencryptsh
 
-Example Variables file
+
+
+Example variables file
 ----------------------
 
     ---
@@ -152,6 +147,19 @@ Example Variables file
       chown root:root /etc/nginx/ssl/${DOMAIN}/*
       chmod 600 /etc/nginx/ssl/${DOMAIN}/*
       systemctl restart nginx.service
+
+
+Tips
+----
+
+To create certificates on ansible deployment, you can call the regular cron
+script: `shell: "/etc/cron.weekly/letsencrypt.sh"`. The
+[folder `tests`](https://github.com/martin-v/ansible-letsencryptsh/tree/master/tests)
+contain a full running example.
+
+
+For import from official letsencrypt client take a look at
+[letsencrypt.sh import wiki page](https://github.com/lukas2511/letsencrypt.sh/wiki/Import-from-official-letsencrypt-client).
 
 
 Open tasks
