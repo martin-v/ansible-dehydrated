@@ -3,7 +3,7 @@
 
 - name: Create domain configuration file
   copy:
-    content: "{{ domanins | mandatory }}"
+    content: "{{ lcsh_domanins | mandatory }}"
     dest: "{{ lcsh_configdir }}/domains.txt"
     owner: "{{ lcsh_username }}"
     group: "{{ lcsh_usergroup }}"

@@ -2,7 +2,7 @@
 
 lcsh_contactemail: certmaster@example.com
 
-domanins: |
+lcsh_domanins: |
   example.com
   example.org www.example.org blog.example.org
 

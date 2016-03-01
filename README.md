@@ -47,7 +47,7 @@ be created, in folder `/etc/letsencrypt.sh/certs/` with the name of the first
 domain in line. The first domain is the common name, the other in line will
 be alternate names for the certificate.
 
-    domanins: |
+    lcsh_domanins: |
       example.com
       example.org www.example.org blog.example.org
 
@@ -89,7 +89,7 @@ Example Variables file
 
     lcsh_contactemail: certmaster@example.com
 
-    domanins: |
+    lcsh_domanins: |
       example.com
       example.org www.example.org blog.example.org
 
