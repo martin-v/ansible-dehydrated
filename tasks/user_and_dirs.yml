@@ -13,13 +13,20 @@
     group: "{{ lcsh_usergroup }}"
 
 
+- name: Set paranoid umask for user
+  lineinfile:
+    dest: "{{ lcsh_userhome }}/.profile"
+    regexp: "^#?umask"
+    line: "umask 0077 # paranoid umask, we're creating private keys "
+
+
 - name: Create configuration directory {{ lcsh_configdir }}
   file:
     path: "{{ lcsh_configdir }}"
     state: directory
     owner: "{{ lcsh_username }}"
     group: "{{ lcsh_usergroup }}"
-    mode: 0750
+    mode: 0700
 
 
 - name: Create acme-challenges directory {{ lcsh_challengesdir }}
@@ -28,4 +35,4 @@
     state: directory
     owner: "{{ lcsh_username }}"
     group: "{{ lcsh_usergroup }}"
-    mode: 0750
+    mode: 0700
