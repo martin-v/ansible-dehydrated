@@ -16,7 +16,7 @@ lcsh_challengesdir: /var/www/letsencrypt.sh/
 
 
 
-# advanced variables, normaly you don't need change any of them.
+# unusual variables, normaly you don't need change any of them.
 
 
 # username for privilege dropping.
