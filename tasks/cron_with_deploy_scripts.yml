@@ -35,5 +35,5 @@
 - name: Add cron script for regularly renewals
   template:
     src: cron_letsencrypt.sh.j2
-    dest: /etc/cron.weekly/letsencrypt.sh
+    dest: /etc/cron.weekly/letsencrypt-sh
     mode: 0700
