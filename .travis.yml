@@ -9,8 +9,8 @@ before_install:
   - sudo apt-get install python-pip mktemp -qq
 
 install:
-  # Install Ansible, set to version 2.0.0 because 2.0.1 has a bug.
-  - pip install ansible==2.0.0
+  # Install Ansible
+  - pip install ansible
 
   # Create ansible.cfg with "correct" roles_path
   - printf '[defaults]\nroles_path=../' >ansible.cfg
