@@ -15,6 +15,12 @@ function log() {
 log "cron run $(date -Is) start"
 
 
+# run etckeeper if configured
+if [ -d /etc/.git ] ; then
+	etckeeper commit "commit before letsencrypt-sh run"
+fi
+
+
 # start letsencrypt.sh with option --cron
 su "$LCSH_USER" --command "$LCSH_BIN --cron" >> "$LOG" 2> >(tee -a "$LOG" >&2)
 
@@ -49,6 +55,12 @@ log "certificates deployed, start cleanup"
 
 # start letsencrypt.sh with option --cleanup
 su "$LCSH_USER" --command "$LCSH_BIN --cleanup" >> "$LOG" 2> >(tee -a "$LOG" >&2)
+
+
+# run etckeeper if configured
+if [ -d /etc/.git ] ; then
+	etckeeper commit "commit after letsencrypt-sh run"
+fi
 
 
 log "cron run $(date -Is) end"
