@@ -6,9 +6,10 @@
     name: "{{ item }}"
     state: present
   with_items:
-  - openssl
+  - bash
   - curl
-  - sed
+  - git
   - grep
   - mktemp
-  - git
+  - openssl
+  - sed
