@@ -74,13 +74,13 @@ Parameters:
 
 * `DOMAIN`
   The primary domain name, i.e. the certificate common name (CN).
-* `KEYFILE`
+* `KEYFILE` (Filename: privkey.pem)
   The path of the file containing the private key.
-* `CERTFILE`
+* `CERTFILE` (Filename: cert.pem)
   The path of the file containing the signed certificate.
-* `FULLCHAINFILE`
+* `FULLCHAINFILE` (Filename: fullchain.pem)
   The path of the file containing the full certificate chain.
-* `CHAINFILE`
+* `CHAINFILE` (Filename: chain.pem)
   The path of the file containing the intermediate certificate(s).
 
 Example:
