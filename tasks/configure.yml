@@ -1,4 +1,5 @@
 ---
+- etckeeper: action=begin
 
 
 - name: Create domain configuration file
@@ -41,3 +42,6 @@
     dest: "{{ lcsh_configdir }}/config.sh"
     regexp: "^#?CA"
     line: "CA=\"{{ lcsh_acme_api }}\""
+
+
+- etckeeper: "action=commit msg='ansible: {{ vars['role_name']}}.configure' rev={{ revision }}"

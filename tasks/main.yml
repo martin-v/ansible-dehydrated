@@ -1,4 +1,5 @@
 ---
+- etckeeper: action=begin
 
 
 - include: packages.yml
@@ -6,3 +7,6 @@
 - include: clone_repo.yml
 - include: configure.yml
 - include: cron_with_deploy_scripts.yml
+
+
+- etckeeper: action=end

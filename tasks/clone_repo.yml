@@ -1,4 +1,5 @@
 ---
+- etckeeper: action=begin
 
 
 - name: Clone repository to userhome
@@ -6,3 +7,6 @@
     repo: "{{ lcsh_repourl }}"
     dest: "{{ lcsh_userhome }}/letsencrypt.sh"
     version: "{{ lcsh_commit }}"
+
+
+- etckeeper: action=end

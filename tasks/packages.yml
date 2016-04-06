@@ -1,4 +1,5 @@
 ---
+- etckeeper: action=begin
 
 
 - name: Install required packages
@@ -13,3 +14,6 @@
   - mktemp
   - openssl
   - sed
+
+
+- etckeeper: "action=commit msg='ansible: {{ vars['role_name']}}.packages' rev={{ revision }}"

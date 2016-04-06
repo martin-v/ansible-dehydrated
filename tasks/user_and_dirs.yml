@@ -1,4 +1,5 @@
 ---
+- etckeeper: action=begin
 
 
 - name: Create group for user {{ lcsh_username }}
@@ -36,3 +37,6 @@
     owner: "{{ lcsh_username }}"
     group: "{{ lcsh_usergroup }}"
     mode: 0700
+
+
+- etckeeper: "action=commit msg='ansible: {{ vars['role_name']}}.user_and_dirs' rev={{ revision }}"

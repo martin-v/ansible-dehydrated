@@ -1,4 +1,5 @@
 ---
+- etckeeper: action=begin
 
 
 - name: Create to_deploy directory for hook.sh
@@ -37,3 +38,6 @@
     src: cron_letsencrypt.sh.j2
     dest: /etc/cron.weekly/letsencrypt-sh
     mode: 0700
+
+
+- etckeeper: "action=commit msg='ansible: {{ vars['role_name']}}.cron_with_deploy_scripts' rev={{ revision }}"
