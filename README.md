@@ -41,14 +41,14 @@ but should be not happen if the cron job works fine.
     lcsh_contactemail: certmaster@example.com
 
 
-#### lcsh_domanins
+#### lcsh_domains
 
 List of domains for certificate requests. For each line a certificate will
 be created, in folder `/etc/letsencrypt.sh/certs/` with the name of the first
 domain in line. The first domain is the common name, the other in line will
 be alternate names for the certificate.
 
-    lcsh_domanins: |
+    lcsh_domains: |
       example.com
       example.org www.example.org blog.example.org
 
@@ -137,7 +137,7 @@ Example variables file
 
     lcsh_contactemail: certmaster@example.com
 
-    lcsh_domanins: |
+    lcsh_domains: |
       example.com
       example.org www.example.org blog.example.org
 
