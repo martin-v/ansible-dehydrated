@@ -36,7 +36,7 @@
     state: directory
     owner: "{{ lcsh_username }}"
     group: "{{ lcsh_usergroup }}"
-    mode: 0700
+    mode: 0755  # This folder must be readable by webserver
 
 
 - etckeeper: "action=commit msg='ansible: {{ vars['role_name']}}.user_and_dirs' rev={{ revision }}"
