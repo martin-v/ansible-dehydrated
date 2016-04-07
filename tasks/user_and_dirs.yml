@@ -35,4 +35,4 @@
     state: directory
     owner: "{{ lcsh_username }}"
     group: "{{ lcsh_usergroup }}"
-    mode: 0700
+    mode: 0755  # This folder must be readable by webserver
