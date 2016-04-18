@@ -16,7 +16,7 @@ log "cron run $(date -Is) start"
 
 
 # run etckeeper if configured
-if [ -d /etc/.git ] ; then
+if ( [ -d /etc/.git ] && etckeeper unclean ) ; then
 	etckeeper commit "commit before letsencrypt-sh run"
 fi
 
@@ -58,7 +58,7 @@ su "$LCSH_USER" --command "$LCSH_BIN --cleanup" >> "$LOG" 2> >(tee -a "$LOG" >&2
 
 
 # run etckeeper if configured
-if [ -d /etc/.git ] ; then
+if ( [ -d /etc/.git ] && etckeeper unclean ) ; then
 	etckeeper commit "commit after letsencrypt-sh run"
 fi
 
