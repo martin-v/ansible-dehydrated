@@ -4,7 +4,8 @@
 ENV['ANSIBLE_ROLES_PATH'] = ".."
 
 Vagrant.configure(2) do |config|
-	config.vm.box = "martin-v/debian-jessie-libvirt"
+	config.vm.box = "debian/jessie64"
+	config.vm.synced_folder ".", "/vagrant", disabled: true
 	config.vm.hostname = "letsencrypttest"
 	config.vm.provision :ansible do |ansible|
 		ansible.playbook = "tests/test.yml"
