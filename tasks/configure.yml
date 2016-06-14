@@ -10,10 +10,19 @@
     group: "{{ lcsh_usergroup }}"
 
 
-- name: Copy config.sh example to configuration directory
+- name: Check for old configuration file
+  stat: path={{ lcsh_configdir }}/config.sh
+  always_run: yes
+  register: lcsh_old_config_dir
+- name: Move old configuration file to new place
+  command: mv {{ lcsh_configdir }}/config.sh {{ lcsh_configdir }}/config
+  when: lcsh_old_config_dir.stat.exists
+
+
+- name: Copy config example to configuration directory
   copy:
-    src: "{{ lcsh_userhome }}/letsencrypt.sh/config.sh.example"
-    dest: "{{ lcsh_configdir }}/config.sh"
+    src: "{{ lcsh_userhome }}/letsencrypt.sh/docs/examples/config"
+    dest: "{{ lcsh_configdir }}/config"
     remote_src: true
     force: false
     owner: "{{ lcsh_username }}"
@@ -21,25 +30,39 @@
 
 - name: Set BASEDIR value to lcsh_configdir value
   lineinfile:
-    dest: "{{ lcsh_configdir }}/config.sh"
+    dest: "{{ lcsh_configdir }}/config"
     regexp: "^#?BASEDIR"
     line: "BASEDIR=\"{{ lcsh_configdir }}\""
 
 - name: Set WELLKNOWN value to lcsh_challengesdir value
   lineinfile:
-    dest: "{{ lcsh_configdir }}/config.sh"
+    dest: "{{ lcsh_configdir }}/config"
     regexp: "^#?WELLKNOWN"
     line: "WELLKNOWN=\"{{ lcsh_challengesdir }}\""
 
+- name: Set PRIVATE_KEY_RENEW value to lcsh_privatekeyrenew value
+  lineinfile:
+    dest: "{{ lcsh_configdir }}/config"
+    regexp: "^#?PRIVATE_KEY_RENEW"
+    line: "PRIVATE_KEY_RENEW=\"{{ lcsh_privatekeyrenew }}\""
+
 - name: Set CONTACT_EMAIL value to lcsh_contactemail value
   lineinfile:
-    dest: "{{ lcsh_configdir }}/config.sh"
+    dest: "{{ lcsh_configdir }}/config"
     regexp: "^#?CONTACT_EMAIL"
     line: "CONTACT_EMAIL=\"{{ lcsh_contactemail | mandatory }}\""
 
+- name: Set OCSP_MUST_STAPLE value to lcsh_ocsp_must_staple value
+  lineinfile:
+    dest: "{{ lcsh_configdir }}/config"
+    regexp: "^#?OCSP_MUST_STAPLE"
+    line: "OCSP_MUST_STAPLE=\"{{ lcsh_ocsp_must_staple }}\""
+
+
+
 - name: Set path to certificate authority
   lineinfile:
-    dest: "{{ lcsh_configdir }}/config.sh"
+    dest: "{{ lcsh_configdir }}/config"
     regexp: "^#?CA"
     line: "CA=\"{{ lcsh_acme_api }}\""
 
