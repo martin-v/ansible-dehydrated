@@ -9,6 +9,10 @@ function clean_challenge {
 	:
 }
 
+function unchanged_cert {
+	:
+}
+
 function deploy_cert {
 	echo "Hook for domain $1 triggerd, add to {{ lcsh_configdir }}/to_deploy folder!"
 	echo "$@" > "{{ lcsh_configdir }}/to_deploy/$1"

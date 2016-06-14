@@ -20,7 +20,7 @@
 
 - name: Set HOOK value for deploy scripts in configuration
   lineinfile:
-    dest: "{{ lcsh_configdir }}/config.sh"
+    dest: "{{ lcsh_configdir }}/config"
     regexp: "^#?HOOK"
     line: "HOOK=\"{{ lcsh_configdir }}/hook.sh\""
 

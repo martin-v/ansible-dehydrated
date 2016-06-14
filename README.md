@@ -7,7 +7,7 @@ and cron configuration for certificate renewals.
 
 **letsencrypt.sh is working with your private keys so be careful and review
 the code of this [ansible role](https://github.com/martin-v/ansible-letsencryptsh)
-an the used [letsencrypt.sh script](https://github.com/lukas2511/letsencrypt.sh/blob/2099c77fee3e7a15c5cea93063248af4569bf8de/letsencrypt.sh).**
+an the used [letsencrypt.sh script](https://github.com/lukas2511/letsencrypt.sh/blob/2042b177c7c81bee5b83debb201758ba411a873d/letsencrypt.sh).**
 
 
 Requirements
@@ -82,6 +82,8 @@ Parameters:
   The path of the file containing the full certificate chain.
 * `CHAINFILE` (Filename: chain.pem)
   The path of the file containing the intermediate certificate(s).
+* `TIMESTAMP` (Filename: chain.pem)
+  Timestamp when the specified certificate was created.
 
 Example:
 
