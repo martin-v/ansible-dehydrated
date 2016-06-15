@@ -12,6 +12,17 @@
   - apt: package=etckeeper state=present
   - set_fact:
       revision: "{{ lookup('pipe', 'cd \"%s\" ; git rev-parse HEAD' % playbook_dir) }}"
+  # Ubuntu sucks
+  - lineinfile:
+      dest: "/etc/etckeeper/etckeeper.conf"
+      regexp: '^VCS="[^git][a-z]*"'
+      state: absent
+    when: ansible_distribution == 'Ubuntu'
+  - lineinfile:
+      dest: "/etc/etckeeper/etckeeper.conf"
+      regexp: "^#?VCS=\"git\""
+      line: "VCS=\"git\""
+    when: ansible_distribution == 'Ubuntu'
   - shell: "etckeeper init && etckeeper commit initial"
     when: ansible_distribution == 'Ubuntu'
 
