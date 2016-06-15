@@ -24,7 +24,8 @@
       line: "VCS=\"git\""
     when: ansible_distribution == 'Ubuntu'
   - shell: "etckeeper init && etckeeper commit initial"
-    when: ansible_distribution == 'Ubuntu'
+    args:
+      creates: /etc/.etckeeper
 
 
 - hosts: all
