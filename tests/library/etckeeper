@@ -1,0 +1,81 @@
+#!/usr/bin/python2
+
+# To test this, use:
+#
+#   mkdir test
+#   export ETCKEEPER_DIR="$(realpath test)"
+#   etckeeper init
+#   ansible localhost -m "etckeeper" -a "action=begin"
+#   ansible localhost -m "etckeeper" -a "action=commit msg=..."
+
+
+DOCUMENTATION = '''
+---
+module: etckeeper
+short_description: Provides a concise way to invoke etckeeper before and after plays.
+'''
+
+EXAMPLES = '''
+- etckeeper: action=begin
+
+- etckeeper: action=commit msg="foo"
+
+- etckeeper: action=end
+'''
+
+from os.path import exists
+from ansible.module_utils.basic import *
+import distutils.spawn
+
+def main():
+
+    module = AnsibleModule(
+        supports_check_mode=True,
+        argument_spec={
+            'action': dict(required=True, choices=['begin', 'commit', 'end']),
+            'ignore_missing_etckeeper': dict(default='no', choices=BOOLEANS),
+            'msg': dict(),
+            'rev': dict(),
+        }
+    )
+
+    if not distutils.spawn.find_executable('etckeeper'):
+        if module.params['ignore_missing_etckeeper']:
+            module.exit_json()
+
+    rc, out, err = module.run_command(['etckeeper', 'unclean'])
+    if err:
+        module.fail_json(msg=err)
+    is_clean = (rc != 0)
+
+    if module.params['action'] in ('begin', 'end'):
+        if is_clean:
+            module.exit_json()
+        else:
+            module.fail_json(msg='/etc is not clean')
+
+
+    elif module.params['action'] == 'commit':
+        if module.check_mode:
+            if is_clean:
+                module.exit_json(changed=False)
+            else:
+                module.fail_json(msg='/etc is supposed to remain clean in check mode')
+        if not is_clean:
+            msg = module.params['msg']
+            if not msg:
+                module.fail_json(msg='msg must not be empty')
+            if module.params['rev']:
+                msg += "\n\nRevision: " + module.params['rev']
+            rc, out, err = module.run_command(['etckeeper', 'commit', msg], check_rc=True)
+            if err:
+                module.fail_json(msg=err)
+        module.exit_json(changed=not is_clean)
+
+    else:
+        module.fail_json(msg='bad action: "%s"' % module.params['action'])
+
+
+if __name__ == '__main__':
+    main()
+

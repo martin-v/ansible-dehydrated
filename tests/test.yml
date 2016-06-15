@@ -8,6 +8,12 @@
     apt:
       package: "nginx-light"
       state: present
+  # etckeeper setup
+  - apt: package=etckeeper state=present
+  - set_fact:
+      revision: "{{ lookup('pipe', 'cd \"%s\" ; git rev-parse HEAD' % playbook_dir) }}"
+  - shell: "etckeeper init && etckeeper commit initial"
+    when: ansible_distribution == 'Ubuntu'
 
 
 - hosts: all
