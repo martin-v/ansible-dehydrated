@@ -23,9 +23,9 @@
       regexp: "^#?VCS=\"git\""
       line: "VCS=\"git\""
     when: ansible_distribution == 'Ubuntu'
-  - shell: "etckeeper init && etckeeper commit initial"
+  - shell: "etckeeper uninit -f ; etckeeper init && etckeeper commit initial > /dev/null"
     args:
-      creates: /etc/.etckeeper
+      creates: /etc/.git
 
 
 - hosts: all
