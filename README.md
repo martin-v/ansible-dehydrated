@@ -7,7 +7,7 @@ and cron configuration for certificate renewals.
 
 **letsencrypt.sh is working with your private keys so be careful and review
 the code of this [ansible role](https://github.com/martin-v/ansible-letsencryptsh)
-an the used [letsencrypt.sh script](https://github.com/lukas2511/letsencrypt.sh/blob/2042b177c7c81bee5b83debb201758ba411a873d/letsencrypt.sh).**
+an the used [letsencrypt.sh script](https://github.com/lukas2511/letsencrypt.sh/blob/afabfff06e2dece1772ed788ac41ca0d297ab49b/letsencrypt.sh).**
 
 
 Requirements

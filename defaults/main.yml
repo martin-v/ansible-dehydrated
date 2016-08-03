@@ -44,4 +44,4 @@ lcsh_acme_api: https://acme-v01.api.letsencrypt.org/directory
 lcsh_repourl: https://github.com/lukas2511/letsencrypt.sh.git
 # use here only versions you have reviewed by your self, letsencrypt.sh is
 # working with your secret key, so be carefull!
-lcsh_commit: 2042b177c7c81bee5b83debb201758ba411a873d
+lcsh_commit: afabfff06e2dece1772ed788ac41ca0d297ab49b
