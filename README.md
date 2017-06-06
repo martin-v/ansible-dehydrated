@@ -41,6 +41,15 @@ but should be not happen if the cron job works fine.
     dehydrated_contactemail: certmaster@example.com
 
 
+#### dehydrated_letsencrypt_agreed_terms
+
+To accept the letsencrypt terms of service set the variable
+`dehydrated_letsencrypt_agreed_terms` to the current license url.
+You find the actual url at https://acme-v01.api.letsencrypt.org/terms.
+
+    dehydrated_letsencrypt_agreed_terms: https://letsencrypt.org/documents/LE-SA-v1.1.1-August-1-2016.pdf
+
+
 #### dehydrated_domains
 
 List of domains for certificate requests. For each line a certificate will

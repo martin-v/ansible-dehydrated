@@ -4,8 +4,11 @@
 #dehydrated_contactemail:
 
 # See README.md for details. Commented out to enforce mandatory variable!
-#dehydrated_domains:
+#dehydrated_letsencrypt_agreed_terms:
 
+
+# See README.md for details. Commented out to enforce mandatory variable!
+#dehydrated_domains:
 
 # See README.md for details. Commented out to enforce mandatory variable!
 #dehydrated_deploy_cert:

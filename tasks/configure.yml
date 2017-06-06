@@ -57,6 +57,11 @@
     regexp: "^#?OCSP_MUST_STAPLE"
     line: "OCSP_MUST_STAPLE=\"{{ dehydrated_ocsp_must_staple }}\""
 
+- name: Set LICENSE value to dehydrated_letsencrypt_agreed_terms value
+  lineinfile:
+    dest: "{{ dehydrated_configdir }}/config"
+    regexp: "^#?LICENSE"
+    line: "LICENSE=\"{{ dehydrated_letsencrypt_agreed_terms }}\""
 
 
 - name: Set path to certificate authority
