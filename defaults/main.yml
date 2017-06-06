@@ -44,4 +44,4 @@ dehydrated_acme_api: https://acme-v01.api.letsencrypt.org/directory
 dehydrated_repourl: https://github.com/lukas2511/dehydrated.git
 # use here only versions you have reviewed by your self, dehydrated is
 # working with your secret key, so be carefull!
-dehydrated_commit: afabfff06e2dece1772ed788ac41ca0d297ab49b
+dehydrated_commit: 116386486b3749e4c5e1b4da35904f30f8b2749b

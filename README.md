@@ -7,7 +7,7 @@ and cron configuration for certificate renewals.
 
 **dehydrated is working with your private keys so be careful and review
 the code of this [ansible role](https://github.com/martin-v/ansible-dehydrated)
-an the used [dehydrated script](https://github.com/lukas2511/dehydrated/blob/afabfff06e2dece1772ed788ac41ca0d297ab49b/dehydrated).**
+an the used [dehydrated script](https://github.com/lukas2511/dehydrated/blob/116386486b3749e4c5e1b4da35904f30f8b2749b/dehydrated).**
 
 
 Requirements

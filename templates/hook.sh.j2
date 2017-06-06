@@ -13,6 +13,14 @@ function unchanged_cert {
 	:
 }
 
+function invalid_challenge {
+	:
+}
+
+function exit_hook {
+	:
+}
+
 function deploy_cert {
 	echo "Hook for domain $1 triggerd, add to {{ dehydrated_configdir }}/to_deploy folder!"
 	echo "$@" > "{{ dehydrated_configdir }}/to_deploy/$1"
