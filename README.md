@@ -1,13 +1,13 @@
-letsencrypt.sh
+dehydrated
 ==============
 
-Install and configure `letsencrypt.sh`. Create user for privilege dropping
+Install and configure `dehydrated`. Create user for privilege dropping
 and cron configuration for certificate renewals.
 
 
-**letsencrypt.sh is working with your private keys so be careful and review
-the code of this [ansible role](https://github.com/martin-v/ansible-letsencryptsh)
-an the used [letsencrypt.sh script](https://github.com/lukas2511/letsencrypt.sh/blob/afabfff06e2dece1772ed788ac41ca0d297ab49b/letsencrypt.sh).**
+**dehydrated is working with your private keys so be careful and review
+the code of this [ansible role](https://github.com/martin-v/ansible-dehydrated)
+an the used [dehydrated script](https://github.com/lukas2511/dehydrated/blob/afabfff06e2dece1772ed788ac41ca0d297ab49b/dehydrated).**
 
 
 Requirements
@@ -22,8 +22,8 @@ The role installs on host:
   * mktemp
   * git
 
-This role need a webserver who serves the directory configured in `lcsh_challengesdir`
-(default: `/var/www/letsencrypt.sh/`) at location
+This role need a webserver who serves the directory configured in `dehydrated_challengesdir`
+(default: `/var/www/dehydrated/`) at location
 `http://<your-domain>/.well-known/acme-challenge/` for all certificate
 request domains.
 
@@ -33,27 +33,27 @@ Role Variables
 
 ### Required Variables:
 
-#### lcsh_contactemail
+#### dehydrated_contactemail
 
 Address for the letsencrypt account. Mostly for certificate expiration notices,
 but should be not happen if the cron job works fine.
 
-    lcsh_contactemail: certmaster@example.com
+    dehydrated_contactemail: certmaster@example.com
 
 
-#### lcsh_domains
+#### dehydrated_domains
 
 List of domains for certificate requests. For each line a certificate will
-be created, in folder `/etc/letsencrypt.sh/certs/` with the name of the first
+be created, in folder `/etc/dehydrated/certs/` with the name of the first
 domain in line. The first domain is the common name, the other in line will
 be alternate names for the certificate.
 
-    lcsh_domains: |
+    dehydrated_domains: |
       example.com
       example.org www.example.org blog.example.org
 
 
-#### lcsh_deploy_cert
+#### dehydrated_deploy_cert
 
 The Certificates must be readable for services like apache or dovecot.
 But only the specific services should be allowed to read the certificate
@@ -61,13 +61,13 @@ for this service. So we must change the owner/group to a specific value
 for each certificate. For security reasons this can be only done by root
 user.
 
-To have a generic solution the variable `lcsh_deploy_cert`
+To have a generic solution the variable `dehydrated_deploy_cert`
 exists. This variable must contain bash script for certificate
 deployments. Typical tasks on deployment are copy certificate to other
 directories, change file owner/permissions and restart services.
 
-This code is called similar as normal letsencrypt.sh hooks, but after the
-complete letsencrypt.sh run and with root permissions. The code is called
+This code is called similar as normal dehydrated hooks, but after the
+complete dehydrated run and with root permissions. The code is called
 once for each certificate that has been produced.
 
 Parameters:
@@ -87,7 +87,7 @@ Parameters:
 
 Example:
 
-    lcsh_deploy_cert: |
+    dehydrated_deploy_cert: |
       mkdir -p /etc/nginx/ssl/${DOMAIN}
       cp "${KEYFILE}" "${CERTFILE}" "${FULLCHAINFILE}" "${CHAINFILE}" /etc/nginx/ssl/${DOMAIN}
       chown root:root /etc/nginx/ssl/${DOMAIN}/*
@@ -97,15 +97,15 @@ Example:
 
 ### Optional Variables:
 
-#### lcsh_challengesdir
+#### dehydrated_challengesdir
 
 Directory for acme-challenge files. Your webserver should make this directory
 public on location `http://<your-domain>/.well-known/acme-challenge/` for all domains listed
 before. This directory will be created if it not exist. It should be only
-writable for letsencrypt.sh user and readable by your webserver, this will
+writable for dehydrated user and readable by your webserver, this will
 be enforced by this role.
 
-    lcsh_challengesdir: /var/www/letsencrypt.sh/
+    dehydrated_challengesdir: /var/www/dehydrated/
 
 
 #### More variables
@@ -126,9 +126,9 @@ Example Playbook
     - hosts: all
       remote_user: root
       vars_files:
-        - letsencryptsh_vars.yml
+        - dehydrated_vars.yml
       roles:
-        - martin-v.letsencryptsh
+        - martin-v.dehydrated
 
 
 
@@ -137,13 +137,13 @@ Example variables file
 
     ---
 
-    lcsh_contactemail: certmaster@example.com
+    dehydrated_contactemail: certmaster@example.com
 
-    lcsh_domains: |
+    dehydrated_domains: |
       example.com
       example.org www.example.org blog.example.org
 
-    lcsh_deploy_cert: |
+    dehydrated_deploy_cert: |
       mkdir -p /etc/nginx/ssl/${DOMAIN}
       cp "${KEYFILE}" "${CERTFILE}" "${FULLCHAINFILE}" "${CHAINFILE}" /etc/nginx/ssl/${DOMAIN}
       chown root:root /etc/nginx/ssl/${DOMAIN}/*
@@ -155,20 +155,20 @@ Tips
 ----
 
 To create certificates on ansible deployment, you can call the regular cron
-script: `shell: "/etc/cron.weekly/letsencrypt.sh"`. The
-[folder `tests`](https://github.com/martin-v/ansible-letsencryptsh/tree/master/tests)
+script: `shell: "/etc/cron.weekly/dehydrated"`. The
+[folder `tests`](https://github.com/martin-v/ansible-dehydrated/tree/master/tests)
 contain a full running example.
 
 
 For import from official letsencrypt client take a look at
-[letsencrypt.sh import wiki page](https://github.com/lukas2511/letsencrypt.sh/wiki/Import-from-official-letsencrypt-client).
+[dehydrated import wiki page](https://github.com/lukas2511/dehydrated/wiki/Import-from-official-letsencrypt-client).
 
 
 Open tasks
 ----------
 
-[![Build Status travis](https://travis-ci.org/martin-v/ansible-letsencryptsh.svg?branch=master)](https://travis-ci.org/martin-v/ansible-letsencryptsh)
-[![Build Status semaphore](https://semaphoreci.com/api/v1/martin-v/ansible-letsencryptsh/branches/master/badge.svg)](https://semaphoreci.com/martin-v/ansible-letsencryptsh)
+[![Build Status travis](https://travis-ci.org/martin-v/ansible-dehydrated.svg?branch=master)](https://travis-ci.org/martin-v/ansible-dehydrated)
+[![Build Status semaphore](https://semaphoreci.com/api/v1/martin-v/ansible-dehydrated/branches/master/badge.svg)](https://semaphoreci.com/martin-v/ansible-dehydrated)
 
 0. Write <del>more</del> tests
 0. Example documentation for nginx and apache configuration

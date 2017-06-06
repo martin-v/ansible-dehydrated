@@ -3,26 +3,26 @@
 
 - name: Create to_deploy directory for hook.sh
   file:
-    path: "{{ lcsh_configdir }}/to_deploy"
+    path: "{{ dehydrated_configdir }}/to_deploy"
     state: directory
-    owner: "{{ lcsh_username }}"
-    group: "{{ lcsh_usergroup }}"
+    owner: "{{ dehydrated_username }}"
+    group: "{{ dehydrated_usergroup }}"
     mode: 0750
 
 
 - name: Add hook.sh to create files for deploy_certs script
   template:
     src: hook.sh.j2
-    dest: "{{ lcsh_configdir }}/hook.sh"
+    dest: "{{ dehydrated_configdir }}/hook.sh"
     mode: 0700
-    owner: "{{ lcsh_username }}"
-    group: "{{ lcsh_usergroup }}"
+    owner: "{{ dehydrated_username }}"
+    group: "{{ dehydrated_usergroup }}"
 
 - name: Set HOOK value for deploy scripts in configuration
   lineinfile:
-    dest: "{{ lcsh_configdir }}/config"
+    dest: "{{ dehydrated_configdir }}/config"
     regexp: "^#?HOOK"
-    line: "HOOK=\"{{ lcsh_configdir }}/hook.sh\""
+    line: "HOOK=\"{{ dehydrated_configdir }}/hook.sh\""
 
 
 - name: Add deploy_certs script. Will be called from cron script with root permissions for each domain
@@ -34,6 +34,6 @@
 
 - name: Add cron script for regularly renewals
   template:
-    src: cron_letsencrypt.sh.j2
-    dest: /etc/cron.weekly/letsencrypt-sh
+    src: cron_dehydrated.j2
+    dest: /etc/cron.weekly/dehydrated
     mode: 0700

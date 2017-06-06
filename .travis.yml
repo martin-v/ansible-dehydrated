@@ -16,7 +16,7 @@ install:
   - printf '[defaults]\nroles_path=../' >ansible.cfg
 
   # Create symlink for Ansible role discovery
-  - ln -s $(basename $(pwd)) ../letsencryptsh
+  - ln -s $(basename $(pwd)) ../dehydrated
 
 
 script:
@@ -34,7 +34,7 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
   # Get logfile from script run
-  - cat /home/letsencrypt.sh/weekly-cron.log
+  - cat /home/dehydrated/weekly-cron.log
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

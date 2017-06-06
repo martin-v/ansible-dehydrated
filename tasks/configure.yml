@@ -3,64 +3,64 @@
 
 - name: Create domain configuration file
   copy:
-    content: "{{ lcsh_domains | mandatory }}"
-    dest: "{{ lcsh_configdir }}/domains.txt"
-    owner: "{{ lcsh_username }}"
-    group: "{{ lcsh_usergroup }}"
+    content: "{{ dehydrated_domains | mandatory }}"
+    dest: "{{ dehydrated_configdir }}/domains.txt"
+    owner: "{{ dehydrated_username }}"
+    group: "{{ dehydrated_usergroup }}"
 
 
 - name: Check for old configuration file
-  stat: path={{ lcsh_configdir }}/config.sh
+  stat: path={{ dehydrated_configdir }}/config.sh
   always_run: yes
-  register: lcsh_old_config_dir
+  register: dehydrated_old_config_dir
 - name: Move old configuration file to new place
-  command: mv {{ lcsh_configdir }}/config.sh {{ lcsh_configdir }}/config
-  when: lcsh_old_config_dir.stat.exists
+  command: mv {{ dehydrated_configdir }}/config.sh {{ dehydrated_configdir }}/config
+  when: dehydrated_old_config_dir.stat.exists
 
 
 - name: Copy config example to configuration directory
   copy:
-    src: "{{ lcsh_userhome }}/letsencrypt.sh/docs/examples/config"
-    dest: "{{ lcsh_configdir }}/config"
+    src: "{{ dehydrated_userhome }}/dehydrated/docs/examples/config"
+    dest: "{{ dehydrated_configdir }}/config"
     remote_src: true
     force: false
-    owner: "{{ lcsh_username }}"
-    group: "{{ lcsh_usergroup }}"
+    owner: "{{ dehydrated_username }}"
+    group: "{{ dehydrated_usergroup }}"
 
-- name: Set BASEDIR value to lcsh_configdir value
+- name: Set BASEDIR value to dehydrated_configdir value
   lineinfile:
-    dest: "{{ lcsh_configdir }}/config"
+    dest: "{{ dehydrated_configdir }}/config"
     regexp: "^#?BASEDIR"
-    line: "BASEDIR=\"{{ lcsh_configdir }}\""
+    line: "BASEDIR=\"{{ dehydrated_configdir }}\""
 
-- name: Set WELLKNOWN value to lcsh_challengesdir value
+- name: Set WELLKNOWN value to dehydrated_challengesdir value
   lineinfile:
-    dest: "{{ lcsh_configdir }}/config"
+    dest: "{{ dehydrated_configdir }}/config"
     regexp: "^#?WELLKNOWN"
-    line: "WELLKNOWN=\"{{ lcsh_challengesdir }}\""
+    line: "WELLKNOWN=\"{{ dehydrated_challengesdir }}\""
 
-- name: Set PRIVATE_KEY_RENEW value to lcsh_privatekeyrenew value
+- name: Set PRIVATE_KEY_RENEW value to dehydrated_privatekeyrenew value
   lineinfile:
-    dest: "{{ lcsh_configdir }}/config"
+    dest: "{{ dehydrated_configdir }}/config"
     regexp: "^#?PRIVATE_KEY_RENEW"
-    line: "PRIVATE_KEY_RENEW=\"{{ lcsh_privatekeyrenew }}\""
+    line: "PRIVATE_KEY_RENEW=\"{{ dehydrated_privatekeyrenew }}\""
 
-- name: Set CONTACT_EMAIL value to lcsh_contactemail value
+- name: Set CONTACT_EMAIL value to dehydrated_contactemail value
   lineinfile:
-    dest: "{{ lcsh_configdir }}/config"
+    dest: "{{ dehydrated_configdir }}/config"
     regexp: "^#?CONTACT_EMAIL"
-    line: "CONTACT_EMAIL=\"{{ lcsh_contactemail | mandatory }}\""
+    line: "CONTACT_EMAIL=\"{{ dehydrated_contactemail | mandatory }}\""
 
-- name: Set OCSP_MUST_STAPLE value to lcsh_ocsp_must_staple value
+- name: Set OCSP_MUST_STAPLE value to dehydrated_ocsp_must_staple value
   lineinfile:
-    dest: "{{ lcsh_configdir }}/config"
+    dest: "{{ dehydrated_configdir }}/config"
     regexp: "^#?OCSP_MUST_STAPLE"
-    line: "OCSP_MUST_STAPLE=\"{{ lcsh_ocsp_must_staple }}\""
+    line: "OCSP_MUST_STAPLE=\"{{ dehydrated_ocsp_must_staple }}\""
 
 
 
 - name: Set path to certificate authority
   lineinfile:
-    dest: "{{ lcsh_configdir }}/config"
+    dest: "{{ dehydrated_configdir }}/config"
     regexp: "^#?CA"
-    line: "CA=\"{{ lcsh_acme_api }}\""
+    line: "CA=\"{{ dehydrated_acme_api }}\""

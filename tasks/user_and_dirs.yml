@@ -1,38 +1,38 @@
 ---
 
 
-- name: Create group for user {{ lcsh_username }}
+- name: Create group for user {{ dehydrated_username }}
   group:
-    name: "{{ lcsh_usergroup }}"
+    name: "{{ dehydrated_usergroup }}"
 
 
-- name: Create user for {{ lcsh_username }}
+- name: Create user for {{ dehydrated_username }}
   user:
-    name: "{{ lcsh_username }}"
-    home: "{{ lcsh_userhome }}"
-    group: "{{ lcsh_usergroup }}"
+    name: "{{ dehydrated_username }}"
+    home: "{{ dehydrated_userhome }}"
+    group: "{{ dehydrated_usergroup }}"
 
 
 - name: Set paranoid umask for user
   lineinfile:
-    dest: "{{ lcsh_userhome }}/.profile"
+    dest: "{{ dehydrated_userhome }}/.profile"
     regexp: "^#?umask"
     line: "umask 0077 # paranoid umask, we're creating private keys "
 
 
-- name: Create configuration directory {{ lcsh_configdir }}
+- name: Create configuration directory {{ dehydrated_configdir }}
   file:
-    path: "{{ lcsh_configdir }}"
+    path: "{{ dehydrated_configdir }}"
     state: directory
-    owner: "{{ lcsh_username }}"
-    group: "{{ lcsh_usergroup }}"
+    owner: "{{ dehydrated_username }}"
+    group: "{{ dehydrated_usergroup }}"
     mode: 0700
 
 
-- name: Create acme-challenges directory {{ lcsh_challengesdir }}
+- name: Create acme-challenges directory {{ dehydrated_challengesdir }}
   file:
-    path: "{{ lcsh_challengesdir }}"
+    path: "{{ dehydrated_challengesdir }}"
     state: directory
-    owner: "{{ lcsh_username }}"
-    group: "{{ lcsh_usergroup }}"
+    owner: "{{ dehydrated_username }}"
+    group: "{{ dehydrated_usergroup }}"
     mode: 0755  # This folder must be readable by webserver

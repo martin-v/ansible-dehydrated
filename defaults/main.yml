@@ -1,18 +1,18 @@
 ---
 
 # See README.md for details. Commented out to enforce mandatory variable!
-#lcsh_contactemail:
+#dehydrated_contactemail:
 
 # See README.md for details. Commented out to enforce mandatory variable!
-#lcsh_domains:
+#dehydrated_domains:
 
 
 # See README.md for details. Commented out to enforce mandatory variable!
-#lcsh_deploy_cert:
+#dehydrated_deploy_cert:
 
 
 # See README.md for details.
-lcsh_challengesdir: /var/www/letsencrypt.sh/
+dehydrated_challengesdir: /var/www/dehydrated/
 
 
 
@@ -20,28 +20,28 @@ lcsh_challengesdir: /var/www/letsencrypt.sh/
 
 
 # username for privilege dropping.
-lcsh_username: letsencrypt.sh
+dehydrated_username: dehydrated
 # usergroup for privilege dropping.
-lcsh_usergroup: letsencrypt.sh
-# home for {{ lcsh_username }} and directory for letsencrypt binaries
-lcsh_userhome: /home/letsencrypt.sh
+dehydrated_usergroup: dehydrated
+# home for {{ dehydrated_username }} and directory for letsencrypt binaries
+dehydrated_userhome: /home/dehydrated
 
 
 # directory for configuration files.
-lcsh_configdir: /etc/letsencrypt.sh
+dehydrated_configdir: /etc/dehydrated
 # Regenerate private keys instead of just signing new certificates on renewal
-lcsh_privatekeyrenew: yes
+dehydrated_privatekeyrenew: yes
 # Option to add CSR-flag indicating OCSP stapling to be mandatory
-lcsh_ocsp_must_staple: no
+dehydrated_ocsp_must_staple: no
 
 
 # The acme api to call, for tests use staging api
-lcsh_acme_api: https://acme-v01.api.letsencrypt.org/directory
-#lcsh_acme_api: https://acme-staging.api.letsencrypt.org/directory
+dehydrated_acme_api: https://acme-v01.api.letsencrypt.org/directory
+#dehydrated_acme_api: https://acme-staging.api.letsencrypt.org/directory
 
 
-# url and revison for checkout letsencrypt.sh
-lcsh_repourl: https://github.com/lukas2511/letsencrypt.sh.git
-# use here only versions you have reviewed by your self, letsencrypt.sh is
+# url and revison for checkout dehydrated
+dehydrated_repourl: https://github.com/lukas2511/dehydrated.git
+# use here only versions you have reviewed by your self, dehydrated is
 # working with your secret key, so be carefull!
-lcsh_commit: afabfff06e2dece1772ed788ac41ca0d297ab49b
+dehydrated_commit: afabfff06e2dece1772ed788ac41ca0d297ab49b
