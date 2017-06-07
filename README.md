@@ -148,6 +148,8 @@ Example variables file
 
     dehydrated_contactemail: certmaster@example.com
 
+    dehydrated_letsencrypt_agreed_terms: https://letsencrypt.org/documents/LE-SA-v1.1.1-August-1-2016.pdf
+
     dehydrated_domains: |
       example.com
       example.org www.example.org blog.example.org
@@ -179,7 +181,7 @@ Open tasks
 [![Build Status travis](https://travis-ci.org/martin-v/ansible-dehydrated.svg?branch=master)](https://travis-ci.org/martin-v/ansible-dehydrated)
 [![Build Status semaphore](https://semaphoreci.com/api/v1/martin-v/ansible-dehydrated/branches/master/badge.svg)](https://semaphoreci.com/martin-v/ansible-dehydrated)
 
-0. Write <del>more</del> tests
+0. Use [molecule](https://molecule.readthedocs.io/) for tests
 0. Example documentation for nginx and apache configuration
 
 
