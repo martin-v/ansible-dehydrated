@@ -1,13 +1,15 @@
 ---
 
-lcsh_contactemail: certmaster@example.com
+dehydrated_contactemail: certmaster@example.com
 
-lcsh_domains: |
+dehydrated_letsencrypt_agreed_terms: https://letsencrypt.org/documents/LE-SA-v1.1.1-August-1-2016.pdf
+
+dehydrated_domains: |
   example.com
   example.org www.example.org blog.example.org
 
 
-lcsh_deploy_cert: |
+dehydrated_deploy_cert: |
   mkdir -p /etc/nginx/ssl/${DOMAIN}
   cp "${KEYFILE}" "${CERTFILE}" "${FULLCHAINFILE}" "${CHAINFILE}" /etc/nginx/ssl/${DOMAIN}
   chown root:www-data /etc/nginx/ssl/${DOMAIN}/*
@@ -16,7 +18,7 @@ lcsh_deploy_cert: |
 
 
 # use letsencrypt test api
-lcsh_acme_api: https://acme-staging.api.letsencrypt.org/directory
+dehydrated_acme_api: https://acme-staging.api.letsencrypt.org/directory
 # use test version with workaround for unreachable private test vms
-lcsh_repourl: https://github.com/martin-v/letsencrypt.sh.git
-lcsh_commit: selfsigned_for_test_in_vms
+dehydrated_repourl: https://github.com/martin-v/dehydrated.git
+dehydrated_commit: selfsigned_for_test_in_vms

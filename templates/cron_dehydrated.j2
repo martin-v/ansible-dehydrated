@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 #
-# letsencrypt.sh cron weekly
+# dehydrated cron weekly
 set -o nounset -o errexit -o pipefail
 
-LCSH_USER="{{ lcsh_username }}"
-LCSH_BIN="{{ lcsh_userhome }}/letsencrypt.sh/letsencrypt.sh"
-TO_DEPLOY_DIR="{{ lcsh_configdir }}/to_deploy"
-LOG="{{ lcsh_userhome }}/weekly-cron.log"
+DEHYDRATED_USER="{{ dehydrated_username }}"
+DEHYDRATED_BIN="{{ dehydrated_userhome }}/dehydrated/dehydrated"
+TO_DEPLOY_DIR="{{ dehydrated_configdir }}/to_deploy"
+LOG="{{ dehydrated_userhome }}/weekly-cron.log"
 
 
 function log() {
@@ -17,21 +17,21 @@ log "cron run $(date -Is) start"
 
 # run etckeeper if configured
 if ( [ -d /etc/.git ] && etckeeper unclean ) ; then
-	etckeeper commit "commit before letsencrypt-sh run"
+	etckeeper commit "commit before dehydrated run"
 fi
 
 
-# start letsencrypt.sh with option --cron
-su "$LCSH_USER" --command "$LCSH_BIN --cron" >> "$LOG" 2> >(tee -a "$LOG" >&2)
+# start dehydrated with option --cron
+su "$DEHYDRATED_USER" --command "$DEHYDRATED_BIN --cron" >> "$LOG" 2> >(tee -a "$LOG" >&2)
 
 
-log "letsencrypt.sh finished, start deploy certificates"
+log "dehydrated finished, start deploy certificates"
 
 
 function deploy_cert {
-	# fallback function for syntax errrors in ansible lcsh_deploy_cert variable.
+	# fallback function for syntax errrors in ansible dehydrated_deploy_cert variable.
 	echo "Certificate deployment failed for domain $1!
-		Deploy script has syntax errrors, check your lcsh_deploy_cert variable!"
+		Deploy script has syntax errrors, check your dehydrated_deploy_cert variable!"
 }
 # try to source ansible configured function deploy_cert
 source "/usr/local/sbin/deploy_cert.sh"
@@ -53,13 +53,13 @@ done
 log "certificates deployed, start cleanup"
 
 
-# start letsencrypt.sh with option --cleanup
-su "$LCSH_USER" --command "$LCSH_BIN --cleanup" >> "$LOG" 2> >(tee -a "$LOG" >&2)
+# start dehydrated with option --cleanup
+su "$DEHYDRATED_USER" --command "$DEHYDRATED_BIN --cleanup" >> "$LOG" 2> >(tee -a "$LOG" >&2)
 
 
 # run etckeeper if configured
 if ( [ -d /etc/.git ] && etckeeper unclean ) ; then
-	etckeeper commit "commit after letsencrypt-sh run"
+	etckeeper commit "commit after dehydrated run"
 fi
 
 

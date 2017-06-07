@@ -2,7 +2,7 @@ galaxy_info:
   author: Martin V.
   description: >
     Install and configure
-    [`letsencrypt.sh`](https://github.com/lukas2511/letsencrypt.sh).
+    [`dehydrated`](https://github.com/lukas2511/dehydrated).
     Create user for privilege dropping and cron configuration for certificate
     renewals.
 
@@ -168,6 +168,8 @@ galaxy_info:
     #
     # NOTE: A tag is limited to a single word comprised of
     # alphanumeric characters. Maximum 20 tags per role.
+    - dehydrated
+    - letsencrypt.sh
     - letsencrypt
     - ssl
     - tls

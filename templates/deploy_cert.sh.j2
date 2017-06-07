@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # deploy_cert be called for each domain from cron script.
-# See /etc/cron.weekly/letsencrypt.sh
+# See /etc/cron.weekly/dehydrated
 
 
 function deploy_cert {
@@ -9,7 +9,7 @@ function deploy_cert {
 	set -o xtrace # use tracing for user defined code
 
 # ========== start code from ansible varibale ============
-{{ lcsh_deploy_cert | mandatory }}
+{{ dehydrated_deploy_cert | mandatory }}
 # ========== end code from ansible varibale ==============
 
 	set +o xtrace
