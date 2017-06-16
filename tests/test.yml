@@ -16,15 +16,3 @@
     - test_vars.yml
   roles:
     - martin-v.dehydrated
-
-
-- hosts: all
-  remote_user: root
-  vars_files:
-    - test_vars.yml
-  tasks:
-  - name: run weekly cron script to initial create all certificates
-    shell: /etc/cron.weekly/dehydrated
-    changed_when: false
-    tags:
-    - skip_ansible_lint

@@ -104,6 +104,14 @@ Example:
       systemctl restart nginx.service
 
 
+#### dehydrated_run_cron_on_every_ansible_run
+
+This role trigger on each execution the cron script to create or update the certificates. To disabled this behavior
+use:
+
+    dehydrated_run_cron_on_every_ansible_run: false
+
+
 ### Optional Variables:
 
 #### dehydrated_challengesdir

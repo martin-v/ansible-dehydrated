@@ -42,6 +42,7 @@ do
 	deploy_cert $(cat "$task") &>> "$LOG"
 	if [[ $? == 0 ]];
 	then
+		echo "Deployed new cert for $(basename $task)"
 		rm "$task"
 	else
 		echo "Certificate deployment for domain $(basename $task) failed!

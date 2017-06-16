@@ -37,3 +37,12 @@
     src: cron_dehydrated.j2
     dest: /etc/cron.weekly/dehydrated
     mode: 0700
+
+
+- name: Run weekly cron script for direct certificate updates
+  shell: /etc/cron.weekly/dehydrated
+  register: cron_result
+  changed_when: "cron_result.stdout != ''"
+  tags:
+  - skip_ansible_lint
+  when: dehydrated_run_cron_on_every_ansible_run
