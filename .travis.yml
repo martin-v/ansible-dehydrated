@@ -28,7 +28,8 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
-  # Get logfile from script run
+after_failure:
+  # Get logfile from cron run
   - cat /home/dehydrated/weekly-cron.log
 
 notifications:

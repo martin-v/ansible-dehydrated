@@ -4,15 +4,21 @@
 - hosts: all
   remote_user: root
   tasks:
+  - name: Update repositories cache
+    apt: update_cache=yes
+    changed_when: false
+
+- hosts: all
+  remote_user: root
+  tasks:
   - name: Install nginx-light as test server
     apt:
       package: "nginx-light"
       state: present
 
 
+# run role under test
 - hosts: all
   remote_user: root
-  vars_files:
-    - test_vars.yml
   roles:
     - martin-v.dehydrated
