@@ -10,6 +10,8 @@ the code of this [ansible role](https://github.com/martin-v/ansible-dehydrated)
 an the used [dehydrated script](https://github.com/lukas2511/dehydrated/blob/116386486b3749e4c5e1b4da35904f30f8b2749b/dehydrated).**
 
 
+For an example setup with nginx as https proxy take a look at ansible role [martin-v/ansible-nginx_https_only](https://github.com/martin-v/ansible-nginx_https_only)
+
 Requirements
 ------------
 
@@ -148,11 +150,8 @@ Example Playbook
         - martin-v.dehydrated
 
 
-
 Example variables file
 ----------------------
-
-    ---
 
     dehydrated_contactemail: certmaster@example.com
 
@@ -189,8 +188,7 @@ Open tasks
 [![Build Status travis](https://travis-ci.org/martin-v/ansible-dehydrated.svg?branch=master)](https://travis-ci.org/martin-v/ansible-dehydrated)
 [![Build Status semaphore](https://semaphoreci.com/api/v1/martin-v/ansible-dehydrated/branches/master/badge.svg)](https://semaphoreci.com/martin-v/ansible-dehydrated)
 
-0. Use [molecule](https://molecule.readthedocs.io/) for tests
-0. Example documentation for nginx and apache configuration
+0. Use [molecule](https://molecule.readthedocs.io/) for better tests
 
 
 License
@@ -201,4 +199,4 @@ MIT
 Author Information
 ------------------
 
-This role was created in 2016 by [Martin V](https://github.com/martin-v).
+This role was created in 2016 and improved in 2017 by [Martin V.](https://github.com/martin-v).
