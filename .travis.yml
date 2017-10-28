@@ -16,7 +16,7 @@ script:
   - ansible-playbook -i tests/inventory tests/test.yml --syntax-check
 
   # Best practices check
-  - ansible-lint tests/test.yml
+  #- ansible-lint tests/test.yml
 
   # Run the role/playbook with ansible-playbook.
   - ansible-playbook -i tests/inventory tests/test.yml -vvv --connection=local --become

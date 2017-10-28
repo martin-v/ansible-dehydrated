@@ -30,7 +30,11 @@
       regexp: "^#?VCS=\"git\""
       line: "VCS=\"git\""
     when: ansible_distribution == 'Ubuntu'
-  - shell: "etckeeper uninit -f ; etckeeper init && etckeeper commit initial > /dev/null"
+  - shell: |
+        git config --global user.email "you@example.com"
+        git config --global user.name "Your Name"
+        etckeeper uninit -f
+        etckeeper init && etckeeper commit initial > /dev/null
     args:
       creates: /etc/.git
 

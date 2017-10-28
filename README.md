@@ -189,6 +189,7 @@ Open tasks
 [![Build Status semaphore](https://semaphoreci.com/api/v1/martin-v/ansible-dehydrated/branches/master/badge.svg)](https://semaphoreci.com/martin-v/ansible-dehydrated)
 
 0. Use [molecule](https://molecule.readthedocs.io/) for better tests
+0. Reenable ansible-lint for etckeeper branch
 
 
 License
