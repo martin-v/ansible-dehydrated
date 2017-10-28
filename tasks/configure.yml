@@ -14,6 +14,8 @@
   stat: path={{ dehydrated_configdir }}/config.sh
   always_run: yes
   register: dehydrated_old_config_dir
+  tags:
+  - skip_ansible_lint # for now, cf. https://github.com/geerlingguy/ansible-role-mysql/issues/179#issuecomment-259762499
 - name: Move old configuration file to new place
   command: mv {{ dehydrated_configdir }}/config.sh {{ dehydrated_configdir }}/config
   when: dehydrated_old_config_dir.stat.exists

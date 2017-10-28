@@ -15,6 +15,10 @@
 
 
 # See README.md for details.
+dehydrated_run_cron_on_every_ansible_run: true
+
+
+# See README.md for details.
 dehydrated_challengesdir: /var/www/dehydrated/
 
 
