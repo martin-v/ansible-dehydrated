@@ -18,6 +18,7 @@
     dest: "{{ dehydrated_userhome }}/.profile"
     regexp: "^#?umask"
     line: "umask 0077 # paranoid umask, we're creating private keys "
+    create: yes
 
 
 - name: Create configuration directory {{ dehydrated_configdir }}
