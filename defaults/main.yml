@@ -32,7 +32,8 @@ dehydrated_username: dehydrated
 dehydrated_usergroup: dehydrated
 # home for {{ dehydrated_username }} and directory for letsencrypt binaries
 dehydrated_userhome: /home/dehydrated
-
+# umask for user
+dehydrated_userumask: "0077 # paranoid umask, we're creating private keys"
 
 # directory for configuration files.
 dehydrated_configdir: /etc/dehydrated

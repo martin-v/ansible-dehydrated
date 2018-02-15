@@ -17,7 +17,7 @@
   lineinfile:
     dest: "{{ dehydrated_userhome }}/.profile"
     regexp: "^#?umask"
-    line: "umask 0077 # paranoid umask, we're creating private keys "
+    line: "umask {{ dehydrated_userumask }}"
     create: yes
 
 
