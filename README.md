@@ -49,7 +49,7 @@ To accept the letsencrypt terms of service set the variable
 `dehydrated_letsencrypt_agreed_terms` to the current license url.
 You find the actual url at https://acme-v01.api.letsencrypt.org/terms.
 
-    dehydrated_letsencrypt_agreed_terms: https://letsencrypt.org/documents/LE-SA-v1.1.1-August-1-2016.pdf
+    dehydrated_letsencrypt_agreed_terms: https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf
 
 
 #### dehydrated_domains
@@ -155,7 +155,7 @@ Example variables file
 
     dehydrated_contactemail: certmaster@example.com
 
-    dehydrated_letsencrypt_agreed_terms: https://letsencrypt.org/documents/LE-SA-v1.1.1-August-1-2016.pdf
+    dehydrated_letsencrypt_agreed_terms: https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf
 
     dehydrated_domains: |
       example.com
