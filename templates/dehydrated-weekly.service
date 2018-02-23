@@ -1,0 +1,6 @@
+[Unit]
+Description=Updates certificates with Dehydrated
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/dehydrated-weekly

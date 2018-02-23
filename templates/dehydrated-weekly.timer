@@ -1,0 +1,10 @@
+[Unit]
+Description=Run dehydrated weekly
+
+[Timer]
+OnCalendar=weekly
+Persistent=true
+Unit=dehydrated-weekly.service
+
+[Install]
+WantedBy=timers.target

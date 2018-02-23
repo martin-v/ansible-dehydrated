@@ -32,17 +32,51 @@
     mode: 0700
 
 
-- name: Add cron script for regularly renewals
-  template:
-    src: cron_dehydrated.j2
-    dest: /etc/cron.weekly/dehydrated
-    mode: 0700
+- block:
+    - name: Add cron script for regularly renewals
+      template:
+        src: cron_dehydrated.j2
+        dest: /etc/cron.weekly/dehydrated
+        mode: 0700
 
 
-- name: Run weekly cron script for direct certificate updates
-  shell: /etc/cron.weekly/dehydrated
-  register: cron_result
-  changed_when: "cron_result.stdout != ''"
-  tags:
-  - skip_ansible_lint
-  when: dehydrated_run_cron_on_every_ansible_run
+    - name: Run weekly cron script for direct certificate updates
+      shell: /etc/cron.weekly/dehydrated
+      register: cron_result
+      changed_when: "cron_result.stdout != ''"
+      tags:
+      - skip_ansible_lint
+      when: dehydrated_run_cron_on_every_ansible_run
+  when: not dehydrated_systemd_timer_instead_of_cron
+
+- block:
+    - name: Add script for regularly renewals
+      template:
+        src: cron_dehydrated.j2
+        dest: /usr/local/bin/dehydrated-weekly
+        mode: 0700
+
+    - name: Add systemd timer unit for dehydrated
+      template:
+        src: dehydrated-weekly.timer
+        dest: /etc/systemd/system/dehydrated-weekly.timer
+
+    - name: Add systemd service unit for dehydrated
+      template:
+        src: dehydrated-weekly.service
+        dest: /etc/systemd/system/dehydrated-weekly.service
+
+    - name: enable and start the timer unit
+      systemd:
+        name: dehydrated-weekly.timer
+        enabled: yes
+        state: started
+
+    - name: Run script for direct certificate updates
+      shell: /usr/local/bin/dehydrated-weekly
+      register: cron_result
+      changed_when: "cron_result.stdout != ''"
+      tags:
+      - skip_ansible_lint
+      when: dehydrated_run_cron_on_every_ansible_run
+  when: dehydrated_systemd_timer_instead_of_cron
