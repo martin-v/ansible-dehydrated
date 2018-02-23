@@ -55,3 +55,14 @@ dehydrated_repourl: https://github.com/lukas2511/dehydrated.git
 # use here only versions you have reviewed by your self, dehydrated is
 # working with your secret key, so be carefull!
 dehydrated_commit: 116386486b3749e4c5e1b4da35904f30f8b2749b
+
+# Packages that need to be installed in order for dehydrated to function.
+# Change this when the ones in the target OS are named differently
+dehydrated_packages:
+  - bash
+  - curl
+  - git
+  - grep
+  - mktemp
+  - openssl
+  - sed
