@@ -5,11 +5,4 @@
   package:
     name: "{{ item }}"
     state: present
-  with_items:
-  - bash
-  - curl
-  - git
-  - grep
-  - mktemp
-  - openssl
-  - sed
+  with_items: '{{ dehydrated_packages }}'
