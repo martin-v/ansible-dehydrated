@@ -71,3 +71,9 @@
     dest: "{{ dehydrated_configdir }}/config"
     regexp: "^#?CA"
     line: "CA=\"{{ dehydrated_acme_api }}\""
+
+- name: Set the key type to create
+  lineinfile:
+    dest: "{{ dehydrated_configdir }}/config"
+    regexp: "^#?KEY_ALGO"
+    line: "KEY_ALGO=\"{{ dehydrated_key_algo }}\""

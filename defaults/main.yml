@@ -41,6 +41,8 @@ dehydrated_configdir: /etc/dehydrated
 dehydrated_privatekeyrenew: yes
 # Option to add CSR-flag indicating OCSP stapling to be mandatory
 dehydrated_ocsp_must_staple: no
+# The type of key we should generate, one of 'rsa', 'prime256v1' or 'secp384r1'
+dehydrated_key_algo: rsa
 
 
 # The acme api to call, for tests use staging api
