@@ -22,7 +22,7 @@ fi
 
 
 # start dehydrated with option --cron
-su "$DEHYDRATED_USER" --command "$DEHYDRATED_BIN --cron" >> "$LOG" 2> >(tee -a "$LOG" >&2)
+su "$DEHYDRATED_USER" --command "$DEHYDRATED_BIN --cron --config {{ dehydrated_configdir }}/config" >> "$LOG" 2> >(tee -a "$LOG" >&2)
 
 
 log "dehydrated finished, start deploy certificates"
@@ -55,7 +55,7 @@ log "certificates deployed, start cleanup"
 
 
 # start dehydrated with option --cleanup
-su "$DEHYDRATED_USER" --command "$DEHYDRATED_BIN --cleanup" >> "$LOG" 2> >(tee -a "$LOG" >&2)
+su "$DEHYDRATED_USER" --command "$DEHYDRATED_BIN --cleanup --config {{ dehydrated_configdir }}/config" >> "$LOG" 2> >(tee -a "$LOG" >&2)
 
 
 # run etckeeper if configured
