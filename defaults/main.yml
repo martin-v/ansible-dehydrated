@@ -21,6 +21,8 @@ dehydrated_run_cron_on_every_ansible_run: true
 # See README.md for details.
 dehydrated_challengesdir: /var/www/dehydrated/
 
+# Use systemd timer instead of cron
+dehydrated_systemd_timer_instead_of_cron: false
 
 
 # unusual variables, normaly you don't need change any of them.
@@ -32,7 +34,8 @@ dehydrated_username: dehydrated
 dehydrated_usergroup: dehydrated
 # home for {{ dehydrated_username }} and directory for letsencrypt binaries
 dehydrated_userhome: /home/dehydrated
-
+# umask for user
+dehydrated_userumask: "0077 # paranoid umask, we're creating private keys"
 
 # directory for configuration files.
 dehydrated_configdir: /etc/dehydrated
@@ -40,6 +43,8 @@ dehydrated_configdir: /etc/dehydrated
 dehydrated_privatekeyrenew: yes
 # Option to add CSR-flag indicating OCSP stapling to be mandatory
 dehydrated_ocsp_must_staple: no
+# The type of key we should generate, one of 'rsa', 'prime256v1' or 'secp384r1'
+dehydrated_key_algo: rsa
 
 
 # The acme api to call, for tests use staging api
@@ -52,3 +57,14 @@ dehydrated_repourl: https://github.com/lukas2511/dehydrated.git
 # use here only versions you have reviewed by your self, dehydrated is
 # working with your secret key, so be carefull!
 dehydrated_commit: 116386486b3749e4c5e1b4da35904f30f8b2749b
+
+# Packages that need to be installed in order for dehydrated to function.
+# Change this when the ones in the target OS are named differently
+dehydrated_packages:
+  - bash
+  - curl
+  - git
+  - grep
+  - mktemp
+  - openssl
+  - sed

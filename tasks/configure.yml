@@ -73,4 +73,11 @@
     regexp: "^#?CA"
     line: "CA=\"{{ dehydrated_acme_api }}\""
 
+- name: Set the key type to create
+  lineinfile:
+    dest: "{{ dehydrated_configdir }}/config"
+    regexp: "^#?KEY_ALGO"
+    line: "KEY_ALGO=\"{{ dehydrated_key_algo }}\""
+
+
 - etckeeper: "action=commit msg='ansible: {{ vars['role_name']}}.configure' rev={{ revision }}"
