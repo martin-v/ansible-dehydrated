@@ -33,7 +33,7 @@ def main():
         supports_check_mode=True,
         argument_spec={
             'action': dict(required=True, choices=['begin', 'commit', 'end']),
-            'ignore_missing_etckeeper': dict(default='no', choices=BOOLEANS),
+            'ignore_missing_etckeeper': dict(default='no', choices=['yes', 'no', 'true', 'false']),
             'msg': dict(),
             'rev': dict(),
         }
@@ -78,4 +78,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
