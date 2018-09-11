@@ -68,3 +68,21 @@ dehydrated_packages:
   - mktemp
   - openssl
   - sed
+
+dehydrated_config_values:
+  - regexp: "^#?BASEDIR="
+    line: "BASEDIR=\"{{ dehydrated_configdir }}\""
+  - regexp: "^#?WELLKNOWN="
+    line: "WELLKNOWN=\"{{ dehydrated_challengesdir }}\""
+  - regexp: "^#?PRIVATE_KEY_RENEW="
+    line: "PRIVATE_KEY_RENEW=\"{{ dehydrated_privatekeyrenew }}\""
+  - regexp: "^#?CONTACT_EMAIL="
+    line: "CONTACT_EMAIL=\"{{ dehydrated_contactemail | mandatory }}\""
+  - regexp: "^#?OCSP_MUST_STAPLE="
+    line: "OCSP_MUST_STAPLE=\"{{ dehydrated_ocsp_must_staple }}\""
+  - regexp: "^#?LICENSE="
+    line: "LICENSE=\"{{ dehydrated_letsencrypt_agreed_terms }}\""
+  - regexp: "^#?CA="
+    line: "CA=\"{{ dehydrated_acme_api }}\""
+  - regexp: "^#?KEY_ALGO="
+    line: "KEY_ALGO=\"{{ dehydrated_key_algo }}\""
