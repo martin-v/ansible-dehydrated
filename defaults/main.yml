@@ -82,7 +82,7 @@ dehydrated_config_values:
     line: "OCSP_MUST_STAPLE=\"{{ dehydrated_ocsp_must_staple }}\""
   - regexp: "^#?LICENSE"
     line: "LICENSE=\"{{ dehydrated_letsencrypt_agreed_terms }}\""
-  - regexp: "^#?CA"
+  - regexp: "^#?CA="
     line: "CA=\"{{ dehydrated_acme_api }}\""
   - regexp: "^#?KEY_ALGO"
     line: "KEY_ALGO=\"{{ dehydrated_key_algo }}\""
