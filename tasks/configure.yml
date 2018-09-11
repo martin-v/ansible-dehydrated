@@ -29,51 +29,9 @@
     owner: "{{ dehydrated_username }}"
     group: "{{ dehydrated_usergroup }}"
 
-- name: Set BASEDIR value to dehydrated_configdir value
+- name: Configure Dehydrated
   lineinfile:
     dest: "{{ dehydrated_configdir }}/config"
-    regexp: "^#?BASEDIR"
-    line: "BASEDIR=\"{{ dehydrated_configdir }}\""
-
-- name: Set WELLKNOWN value to dehydrated_challengesdir value
-  lineinfile:
-    dest: "{{ dehydrated_configdir }}/config"
-    regexp: "^#?WELLKNOWN"
-    line: "WELLKNOWN=\"{{ dehydrated_challengesdir }}\""
-
-- name: Set PRIVATE_KEY_RENEW value to dehydrated_privatekeyrenew value
-  lineinfile:
-    dest: "{{ dehydrated_configdir }}/config"
-    regexp: "^#?PRIVATE_KEY_RENEW"
-    line: "PRIVATE_KEY_RENEW=\"{{ dehydrated_privatekeyrenew }}\""
-
-- name: Set CONTACT_EMAIL value to dehydrated_contactemail value
-  lineinfile:
-    dest: "{{ dehydrated_configdir }}/config"
-    regexp: "^#?CONTACT_EMAIL"
-    line: "CONTACT_EMAIL=\"{{ dehydrated_contactemail | mandatory }}\""
-
-- name: Set OCSP_MUST_STAPLE value to dehydrated_ocsp_must_staple value
-  lineinfile:
-    dest: "{{ dehydrated_configdir }}/config"
-    regexp: "^#?OCSP_MUST_STAPLE"
-    line: "OCSP_MUST_STAPLE=\"{{ dehydrated_ocsp_must_staple }}\""
-
-- name: Set LICENSE value to dehydrated_letsencrypt_agreed_terms value
-  lineinfile:
-    dest: "{{ dehydrated_configdir }}/config"
-    regexp: "^#?LICENSE"
-    line: "LICENSE=\"{{ dehydrated_letsencrypt_agreed_terms }}\""
-
-
-- name: Set path to certificate authority
-  lineinfile:
-    dest: "{{ dehydrated_configdir }}/config"
-    regexp: "^#?CA"
-    line: "CA=\"{{ dehydrated_acme_api }}\""
-
-- name: Set the key type to create
-  lineinfile:
-    dest: "{{ dehydrated_configdir }}/config"
-    regexp: "^#?KEY_ALGO"
-    line: "KEY_ALGO=\"{{ dehydrated_key_algo }}\""
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items: "{{ dehydrated_config_values }}"
