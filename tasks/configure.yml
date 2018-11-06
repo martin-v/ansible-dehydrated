@@ -11,7 +11,7 @@
 
 - name: Check for old configuration file
   stat: path={{ dehydrated_configdir }}/config.sh
-  always_run: yes
+  check_mode: no
   register: dehydrated_old_config_dir
   tags:
   - skip_ansible_lint # for now, cf. https://github.com/geerlingguy/ansible-role-mysql/issues/179#issuecomment-259762499
